@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AHOY Weather App</string>
+    <string name="favorite">Favorite</string>
+    <string name="weather">Weather</string>
+    <string name="current">Current</string>
+
+
+    <string name="error_occurred">An Error has occurred</string>
+    <string name="error_network">Connection error occurred</string>
+    <string name="error_unknown">Unknown error, please try again</string>
+    <string name="error_server">Server error, please try again later</string>
+</resources>

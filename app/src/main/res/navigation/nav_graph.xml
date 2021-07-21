@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/current_weather">
+
+    <fragment
+        android:id="@+id/current_weather"
+        android:name="io.github.moh_mohsin.ahoyweatherapp.ui.weather.WeatherFragment"
+        android:label="weather_fragment"
+        tools:layout="@layout/weather_fragment" />
+    <fragment
+        android:id="@+id/favorite_cities"
+        android:name="io.github.moh_mohsin.ahoyweatherapp.ui.city.CitiesFragment"
+        android:label="cities_fragment"
+        tools:layout="@layout/cities_fragment" />
+</navigation>
