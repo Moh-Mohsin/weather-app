@@ -4,7 +4,7 @@ import io.github.moh_mohsin.ahoyweatherapp.data.model.WeatherInfo
 import io.github.moh_mohsin.ahoyweatherapp.data.repository.WeatherRepository
 import io.github.moh_mohsin.ahoyweatherapp.data.Result
 import io.github.moh_mohsin.ahoyweatherapp.data.map
-import io.github.moh_mohsin.ahoyweatherapp.data.source.WeatherSource
+import io.github.moh_mohsin.ahoyweatherapp.data.source.WeatherDataSource
 import io.github.moh_mohsin.ahoyweatherapp.data.toWeatherInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
@@ -14,8 +14,8 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class WeatherRepositoryImpl(
-    private val localWeatherSource: WeatherSource,
-    private val remoteWeatherSource: WeatherSource
+    private val weatherLocalDataSource: WeatherDataSource,
+    private val weatherRemoteDataSource: WeatherDataSource
 ) : WeatherRepository {
 
     private val weatherStateFlow = MutableStateFlow<Result<WeatherInfo>>(Result.Loading)
@@ -34,7 +34,7 @@ class WeatherRepositoryImpl(
         if (weatherStateFlow.value is Result.Error) {
             weatherStateFlow.value = Result.Loading
         }
-        val remoteResult = remoteWeatherSource.getWeather(lat, lon).value.map { it.toWeatherInfo() }
+        val remoteResult = weatherRemoteDataSource.getWeather(lat, lon).value.map { it.toWeatherInfo() }
         Timber.d("remoteResult: $remoteResult")
         if (weatherStateFlow.value !is Result.Success || remoteResult is Result.Success) {
             weatherStateFlow.value = remoteResult
