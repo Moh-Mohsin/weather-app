@@ -1,17 +1,15 @@
 package io.github.moh_mohsin.ahoyweatherapp.ui.weather
 
 import android.app.Application
-import androidx.lifecycle.*
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.kodein
-import org.kodein.di.generic.instance
-import timber.log.Timber
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import io.github.moh_mohsin.ahoyweatherapp.data.Result
 import io.github.moh_mohsin.ahoyweatherapp.data.model.WeatherInfo
 import io.github.moh_mohsin.ahoyweatherapp.domain.GetWeatherUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
 class WeatherViewModel(app: Application) : AndroidViewModel(app), KodeinAware {
 
@@ -19,17 +17,8 @@ class WeatherViewModel(app: Application) : AndroidViewModel(app), KodeinAware {
 
     private val getWeatherUseCase by instance<GetWeatherUseCase>()
 
-//    private val _weather: MutableStateFlow<Result<WeatherInfo>> = MutableStateFlow(Result.Loading)
-    val weather: LiveData<Result<WeatherInfo>> = getWeatherUseCase(35.6897, 139.6922).asLiveData()
+    fun getWeather(lat: Double, lon: Double): LiveData<Result<WeatherInfo>> {
+        return getWeatherUseCase(lat, lon).asLiveData()
+    }
 
-//    init {
-//        getWeather()
-//    }
-//
-//    fun getWeather() {
-//        viewModelScope.launch {
-//            val result =
-//            _weather.value = result.value
-//        }
-//    }
 }

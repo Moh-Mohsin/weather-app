@@ -25,11 +25,16 @@ class WeatherRepositoryImpl(
             refreshWeather(lat, lon)
         }
 
-        val res = weatherLocalDataSource.getWeather(lat, lon).combine(remoteWeatherStateFlow) { localWeather, remoteWeatherResult ->
-            val r = localWeather?.toSuccess() ?: remoteWeatherResult
-            Timber.d("combine: $localWeather + $remoteWeatherResult = $r")
-            r
-        }.map { flow -> flow.map { result -> result.toWeatherInfo() } }
+        val res = weatherLocalDataSource.getWeather(lat, lon)
+            .combine(remoteWeatherStateFlow) { localWeather, remoteWeatherResult ->
+                val r = localWeather?.toSuccess() ?: remoteWeatherResult
+                Timber.d(
+                    "combine: ${
+                        localWeather.toString().length
+                    } + ${remoteWeatherResult.toString().length} = ${r.toString().length}"
+                )
+                r
+            }.map { flow -> flow.map { result -> result.toWeatherInfo() } }
         return res
     }
 
@@ -47,3 +52,4 @@ class WeatherRepositoryImpl(
         }
     }
 }
+

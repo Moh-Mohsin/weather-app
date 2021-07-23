@@ -1,5 +1,6 @@
 package io.github.moh_mohsin.ahoyweatherapp.data.source.remote.api
 
+import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.TempMetric
 import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.WeatherInfoDto
 import retrofit2.Call
 import retrofit2.Response
@@ -19,6 +20,8 @@ interface OpenWeatherApi {
         @Query("appid")
         appid: String,
         @Query("exclude")
-        exclude: String = "hourly,minutely",
+        exclude: String = "minutely",
+        @Query("units")
+        units: String = TempMetric.METRIC.toString(),
     ): Response<WeatherInfoDto>
 }

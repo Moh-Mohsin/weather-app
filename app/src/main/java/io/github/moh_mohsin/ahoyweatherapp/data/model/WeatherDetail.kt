@@ -2,7 +2,7 @@ package io.github.moh_mohsin.ahoyweatherapp.data.model
 
 import java.util.*
 
-data class Current(
+data class WeatherDetail(
     val dt: Date,
     val sunrise: Int,
     val sunset: Int,
@@ -17,5 +17,5 @@ data class Current(
     val windSpeed: Double,
     val windDeg: Int,
     val windGust: Double,
-    val weather: List<Weather>?,
+    val weather: List<WeatherDesc>,
 )

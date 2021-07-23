@@ -5,7 +5,8 @@ data class WeatherInfo(
     val lon: Double,
     val timezone: String,
     val timezoneOffset: Int,
-    val current: Current,
+    val current: WeatherDetail,
     val daily: List<Daily>,
+    var hourly: List<WeatherDetail>,
     val tempUnit: TempUnit = TempUnit.CELSIUS
 )

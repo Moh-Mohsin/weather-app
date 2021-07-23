@@ -1,6 +1,6 @@
-package io.github.moh_mohsin.ahoyweatherapp.data.source.dto
+package io.github.moh_mohsin.ahoyweatherapp.data.model
 
-data class WeatherDto(
+data class WeatherDesc(
     val id: Int,
     val main: String,
     val description: String,

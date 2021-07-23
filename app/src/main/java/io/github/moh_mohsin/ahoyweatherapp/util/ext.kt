@@ -8,6 +8,8 @@ import retrofit2.Call
 import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 suspend fun <T> Response<T>.handle(): Result<T> {
@@ -57,4 +59,5 @@ fun <T> Response<T>.getExceptionFromErrorCode(): AppException {
 }
 
 data class MyErrorMessage(val cod: Int, val message: String)
+
 

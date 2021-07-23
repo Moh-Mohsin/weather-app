@@ -1,9 +1,6 @@
 package io.github.moh_mohsin.ahoyweatherapp.data.source.dto
 
-import androidx.room.Embedded
-import androidx.room.Ignore
-
-data class CurrentDto(
+data class WeatherDetailDto(
     var dt: Int,
     var sunrise: Int,
     var sunset: Int,
@@ -18,5 +15,5 @@ data class CurrentDto(
     var windSpeed: Double,
     var windDeg: Int,
     var windGust: Double,
-    var weather: List<WeatherDto>
+    var weather: List<WeatherDescDto>
 )

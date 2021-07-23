@@ -17,7 +17,7 @@ data class DailyDto(
     val windSpeed: Double,
     val windDeg: Int,
     val windGust: Double,
-    @Embedded val weather: List<WeatherDto>, //TODO
+    @Embedded val weather: List<WeatherDescDto>, //TODO
     val clouds: Int,
     val pop: Double,
     val uvi: Double,

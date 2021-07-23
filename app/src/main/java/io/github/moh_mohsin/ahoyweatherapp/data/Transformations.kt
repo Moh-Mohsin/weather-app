@@ -6,8 +6,8 @@ import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.*
 import java.util.*
 
 
-fun WeatherDto.toWeather() =
-    Weather(id, main, description, "http://${BuildConfig.OPEN_WEATHER_DOMAIN}/img/wn/$icon@2x.png")
+fun WeatherDescDto.toWeatherDesc() =
+    WeatherDesc(id, main, description, "http://${BuildConfig.OPEN_WEATHER_DOMAIN}/img/wn/$icon@2x.png")
 
 fun TempDto.toTemp() = Temp(day, min, max, night, eve, morn)
 
@@ -28,14 +28,14 @@ fun DailyDto.toDaily() = Daily(
     windSpeed,
     windDeg,
     windGust,
-    weather.map { it.toWeather() },
+    weather.map { it.toWeatherDesc() },
     clouds,
     pop,
     uvi,
     rain
 )
 
-fun CurrentDto.toCurrent() = Current(
+fun WeatherDetailDto.toWeatherDetail() = WeatherDetail(
     Date(dt * 1000L),
     sunrise,
     sunset,
@@ -50,7 +50,7 @@ fun CurrentDto.toCurrent() = Current(
     windSpeed,
     windDeg,
     windGust,
-    weather.map { it.toWeather() },
+    weather.map { it.toWeatherDesc() },
 )
 
-fun WeatherInfoDto.toWeatherInfo() = WeatherInfo(lat, lon, timezone, timezoneOffset, current.toCurrent(), daily.map { it.toDaily() })
+fun WeatherInfoDto.toWeatherInfo() = WeatherInfo(lat, lon, timezone, timezoneOffset, current.toWeatherDetail(), daily.map { it.toDaily() }, hourly.map { it.toWeatherDetail() })
