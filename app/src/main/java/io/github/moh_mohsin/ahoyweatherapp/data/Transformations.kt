@@ -50,6 +50,7 @@ fun CurrentDto.toCurrent() = Current(
     windSpeed,
     windDeg,
     windGust,
-    weather.map { it.toWeather() })
+    weather.map { it.toWeather() },
+)
 
 fun WeatherInfoDto.toWeatherInfo() = WeatherInfo(lat, lon, timezone, timezoneOffset, current.toCurrent(), daily.map { it.toDaily() })

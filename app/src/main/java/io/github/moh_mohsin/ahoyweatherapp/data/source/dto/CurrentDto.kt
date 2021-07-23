@@ -1,19 +1,22 @@
 package io.github.moh_mohsin.ahoyweatherapp.data.source.dto
 
+import androidx.room.Embedded
+import androidx.room.Ignore
+
 data class CurrentDto(
-    val dt: Int,
-    val sunrise: Int,
-    val sunset: Int,
-    val temp: Double,
-    val feelsLike: Double,
-    val pressure: Int,
-    val humidity: Int,
-    val dewPoint: Double,
-    val uvi: Int,
-    val clouds: Int,
-    val visibility: Int,
-    val windSpeed: Double,
-    val windDeg: Int,
-    val windGust: Double,
-    val weather: List<WeatherDto>
+    var dt: Int,
+    var sunrise: Int,
+    var sunset: Int,
+    var temp: Double,
+    var feelsLike: Double,
+    var pressure: Int,
+    var humidity: Int,
+    var dewPoint: Double,
+    var uvi: Double,
+    var clouds: Int,
+    var visibility: Int,
+    var windSpeed: Double,
+    var windDeg: Int,
+    var windGust: Double,
+    var weather: List<WeatherDto>
 )

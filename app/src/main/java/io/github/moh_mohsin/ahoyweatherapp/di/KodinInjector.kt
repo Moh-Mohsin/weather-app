@@ -1,9 +1,12 @@
 package io.github.moh_mohsin.ahoyweatherapp.di
 
+import androidx.room.Room
 import io.github.moh_mohsin.ahoyweatherapp.data.repository.WeatherRepository
 import io.github.moh_mohsin.ahoyweatherapp.data.repository.impl.WeatherRepositoryImpl
-import io.github.moh_mohsin.ahoyweatherapp.data.source.WeatherDataSource
-import io.github.moh_mohsin.ahoyweatherapp.data.source.remote.WeatherRemoteDataSource
+import io.github.moh_mohsin.ahoyweatherapp.data.source.WeatherLocalDataSource
+import io.github.moh_mohsin.ahoyweatherapp.data.source.WeatherRemoteDataSource
+import io.github.moh_mohsin.ahoyweatherapp.data.source.local.WeatherLocalDataSourceImpl
+import io.github.moh_mohsin.ahoyweatherapp.data.source.remote.WeatherRemoteDataSourceImpl
 import io.github.moh_mohsin.ahoyweatherapp.data.source.remote.api.OpenWeatherApi
 import io.github.moh_mohsin.ahoyweatherapp.data.source.remote.api.OpenWeatherService
 import io.github.moh_mohsin.ahoyweatherapp.domain.GetWeatherUseCase
@@ -21,8 +24,8 @@ val appDependencies = Kodein.Module("app") {
     bind<CoroutineContext>() with provider { Dispatchers.Default }
 
     bind<OpenWeatherApi>() with singleton { OpenWeatherService().getService() }
-    bind<WeatherDataSource>("remote") with singleton { WeatherRemoteDataSource(instance())}
-    bind<WeatherDataSource>("local") with singleton { WeatherRemoteDataSource(instance())} //TODO: replace with Room impl
-    bind<WeatherRepository>() with singleton { WeatherRepositoryImpl(instance("local"), instance("remote")) }
+    bind<WeatherLocalDataSource>() with singleton { WeatherLocalDataSourceImpl(instance()) }
+    bind<WeatherRemoteDataSource>() with singleton { WeatherRemoteDataSourceImpl(instance())}
+    bind<WeatherRepository>() with singleton { WeatherRepositoryImpl(instance(), instance()) }
     bind<GetWeatherUseCase>() with provider { GetWeatherUseCase(instance()) }
 }

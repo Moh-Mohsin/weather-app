@@ -1,5 +1,7 @@
 package io.github.moh_mohsin.ahoyweatherapp.data.source.dto
 
+import androidx.room.Embedded
+
 data class DailyDto(
     val dt: Int,
     val sunrise: Int,
@@ -7,15 +9,15 @@ data class DailyDto(
     val moonrise: Int,
     val moonset: Int,
     val moonPhase: Double,
-    val temp: TempDto,
-    val feelsLike: FeelsLikeDto,
+    @Embedded(prefix = "temp_")  val temp: TempDto,
+    @Embedded(prefix = "feelsLike_")  val feelsLike: FeelsLikeDto,
     val pressure: Int,
     val humidity: Int,
     val dewPoint: Double,
     val windSpeed: Double,
     val windDeg: Int,
     val windGust: Double,
-    val weather: List<WeatherDto>,
+    @Embedded val weather: List<WeatherDto>, //TODO
     val clouds: Int,
     val pop: Double,
     val uvi: Double,

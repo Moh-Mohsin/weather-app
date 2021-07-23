@@ -19,17 +19,17 @@ class WeatherViewModel(app: Application) : AndroidViewModel(app), KodeinAware {
 
     private val getWeatherUseCase by instance<GetWeatherUseCase>()
 
-    private val _weather: MutableStateFlow<Result<WeatherInfo>> = MutableStateFlow(Result.Loading)
-    val weather: LiveData<Result<WeatherInfo>> = _weather.asLiveData()
+//    private val _weather: MutableStateFlow<Result<WeatherInfo>> = MutableStateFlow(Result.Loading)
+    val weather: LiveData<Result<WeatherInfo>> = getWeatherUseCase(35.6897, 139.6922).asLiveData()
 
-    init {
-        getWeather()
-    }
-
-    fun getWeather() {
-        viewModelScope.launch {
-            val result = getWeatherUseCase(35.6897, 139.6922)
-            _weather.value = result.value
-        }
-    }
+//    init {
+//        getWeather()
+//    }
+//
+//    fun getWeather() {
+//        viewModelScope.launch {
+//            val result =
+//            _weather.value = result.value
+//        }
+//    }
 }

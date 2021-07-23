@@ -11,11 +11,11 @@ data class Current(
     val pressure: Int,
     val humidity: Int,
     val dewPoint: Double,
-    val uvi: Int,
+    val uvi: Double,
     val clouds: Int,
     val visibility: Int,
     val windSpeed: Double,
     val windDeg: Int,
     val windGust: Double,
-    val weather: List<Weather>
+    val weather: List<Weather>?,
 )
