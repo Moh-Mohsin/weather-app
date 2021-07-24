@@ -6,8 +6,14 @@ import io.github.moh_mohsin.ahoyweatherapp.data.repository.WeatherRepository
 import io.github.moh_mohsin.ahoyweatherapp.data.source.WeatherLocalDataSource
 import io.github.moh_mohsin.ahoyweatherapp.data.source.WeatherRemoteDataSource
 import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.WeatherInfoDto
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
@@ -34,7 +40,12 @@ class WeatherRepositoryImpl(
                     } + ${remoteWeatherResult.toString().length} = ${r.toString().length}"
                 )
                 r
-            }.map { flow -> flow.map { result -> result.toWeatherInfo() } }
+            }.map { flow ->
+                flow.map { result ->
+                    Timber.d("combine result: ${result.toString().length}")
+                    result.toWeatherInfo()
+                }
+            }
         return res
     }
 
@@ -43,7 +54,7 @@ class WeatherRepositoryImpl(
             if (remoteWeatherStateFlow.value is Result.Error) {
                 remoteWeatherStateFlow.value = Result.Loading
             }
-            delay(5000)
+            delay(1000)
             remoteWeatherStateFlow.value = weatherRemoteDataSource.getWeather(lat, lon).value
             remoteWeatherStateFlow.value.getOrNull()?.let {
                 weatherLocalDataSource.saveWeather(it)

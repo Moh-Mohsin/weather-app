@@ -1,18 +1,19 @@
 package io.github.moh_mohsin.ahoyweatherapp.ui.citysearch
 
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import io.github.moh_mohsin.ahoyweatherapp.R
 import io.github.moh_mohsin.ahoyweatherapp.databinding.CitySearchFragmentBinding
 import io.github.moh_mohsin.ahoyweatherapp.ui.city.adapter.CityAdapter
 import io.github.moh_mohsin.ahoyweatherapp.util.hide
 import io.github.moh_mohsin.ahoyweatherapp.util.show
-import io.github.moh_mohsin.ahoyweatherapp.util.toast
 import io.github.moh_mohsin.ahoyweatherapp.util.viewBinding
-import kotlinx.android.synthetic.main.single_city.*
 import timber.log.Timber
 
 class CitySearchFragment : Fragment(R.layout.city_search_fragment), SearchView.OnQueryTextListener {
@@ -27,7 +28,8 @@ class CitySearchFragment : Fragment(R.layout.city_search_fragment), SearchView.O
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = CityAdapter(onClick = {
-            toast("city clicked: ${it.city.name}")
+            val action = CitySearchFragmentDirections.actionGlobalCityWeatherFragment(it.city)
+            findNavController().navigate(action)
         }, addToFavorite = {
             viewModel.addToFavorite(it.city)
         }, removeFromFavorite = {

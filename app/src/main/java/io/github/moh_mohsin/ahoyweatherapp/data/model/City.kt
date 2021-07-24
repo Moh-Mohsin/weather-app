@@ -1,7 +1,6 @@
 package io.github.moh_mohsin.ahoyweatherapp.data.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import java.io.Serializable
 
 data class City(
     val id: Int,
@@ -14,4 +13,4 @@ data class City(
     val iso3: String,
     val adminName: String,
     val capital: String?,
-)
+) : Serializable

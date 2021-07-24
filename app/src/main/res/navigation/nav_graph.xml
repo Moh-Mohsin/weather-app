@@ -10,6 +10,17 @@
         android:name="io.github.moh_mohsin.ahoyweatherapp.ui.weather.WeatherFragment"
         android:label="weather_fragment"
         tools:layout="@layout/weather_fragment" />
+
+    <fragment
+        android:id="@+id/cityWeatherFragment"
+        android:name="io.github.moh_mohsin.ahoyweatherapp.ui.weather.CityWeatherFragment"
+        android:label="weather_fragment"
+        tools:layout="@layout/weather_fragment">
+        <argument
+            android:name="city"
+            app:argType="io.github.moh_mohsin.ahoyweatherapp.data.model.City" />
+    </fragment>
+
     <fragment
         android:id="@+id/favorite_cities"
         android:name="io.github.moh_mohsin.ahoyweatherapp.ui.city.FavoriteCitiesFragment"
@@ -21,5 +32,8 @@
         android:label="city_search_fragment"
         tools:layout="@layout/city_search_fragment" />
 
+    <action
+        android:id="@+id/action_global_cityWeatherFragment"
+        app:destination="@id/cityWeatherFragment" />
 
 </navigation>

@@ -1,4 +1,4 @@
-package io.github.moh_mohsin.ahoyweatherapp.ui.weather.daily
+package io.github.moh_mohsin.ahoyweatherapp.ui.weather.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,10 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import io.github.moh_mohsin.ahoyweatherapp.data.model.WeatherDetail
-import io.github.moh_mohsin.ahoyweatherapp.databinding.SingleDayWeatherBinding
 import io.github.moh_mohsin.ahoyweatherapp.databinding.SingleHourWeatherBinding
 import io.github.moh_mohsin.ahoyweatherapp.util.format
-import java.util.*
 
 class HourlyWeatherAdapter :
     ListAdapter<WeatherDetail, RecyclerView.ViewHolder>(WeatherDetailsDiffCallback()) {

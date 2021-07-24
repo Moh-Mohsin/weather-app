@@ -1,16 +1,13 @@
 package io.github.moh_mohsin.ahoyweatherapp.ui.weather
 
 import android.annotation.SuppressLint
-import android.location.Location
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import coil.load
-import com.google.android.gms.location.LocationServices
-import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
+import io.github.moh_mohsin.ahoyweatherapp.MainActivity
 import io.github.moh_mohsin.ahoyweatherapp.R
 import io.github.moh_mohsin.ahoyweatherapp.data.Result
 import io.github.moh_mohsin.ahoyweatherapp.data.model.WeatherInfo
@@ -24,10 +21,11 @@ import io.github.moh_mohsin.ahoyweatherapp.util.viewBinding
 import timber.log.Timber
 import java.util.*
 
-class WeatherFragment : Fragment(R.layout.weather_fragment) {
+class CityWeatherFragment : Fragment(R.layout.weather_fragment) {
 
     private val binding by viewBinding(WeatherFragmentBinding::bind)
     private val viewModel by viewModels<WeatherViewModel>()
+    private val args by navArgs<CityWeatherFragmentArgs>()
 
     private lateinit var hourlyWeatherAdapter: HourlyWeatherAdapter
     private lateinit var dailyWeatherAdapter: DailyWeatherAdapter
@@ -42,19 +40,8 @@ class WeatherFragment : Fragment(R.layout.weather_fragment) {
         binding.hourlyWeatherList.adapter = hourlyWeatherAdapter
         binding.dailyWeatherList.adapter = dailyWeatherAdapter
 
-        // use post to solve and issue with the permission library crashing because of FragmentManager
-        Handler(Looper.myLooper()!!).post {
-            runWithPermissions(android.Manifest.permission.ACCESS_FINE_LOCATION) {
-                val fusedLocationClient =
-                    LocationServices.getFusedLocationProviderClient(requireActivity())
-                fusedLocationClient.lastLocation
-                    .addOnSuccessListener { location: Location? ->
-                        location?.let {
-                            subscribe(it.latitude, it.longitude)
-                        } ?: toast("Location not available")
-                    }
-            }
-        }
+        (requireActivity() as MainActivity).supportActionBar?.title = args.city.name
+        subscribe(args.city.lat, args.city.lng)
     }
 
     private fun subscribe(lat: Double, lon: Double) {
