@@ -6,7 +6,6 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="combine" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
@@ -21,16 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9677757b-31a2-4bea-a598-7dd3132739e6" name="Default Changelist" comment="show favorite cities">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/androidTest/java/io/github/moh_mohsin/ahoyweatherapp/data/repository/impl/CityRepositoryImplTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/androidTest/java/io/github/moh_mohsin/ahoyweatherapp/data/source/local/WeatherLocalDataSourceImplTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/androidTest/java/io/github/moh_mohsin/ahoyweatherapp/data/util/TestUtil.kt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/src/main/assets/database/ahoy-weather.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/test/java/io/github/moh_mohsin/ahoyweatherapp/data/source/remote/WeatherRemoteDataSourceImplTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/data/repository/CityRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/data/repository/CityRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/data/repository/impl/CityRepositoryImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/data/repository/impl/CityRepositoryImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/data/source/local/WeatherLocalDataSourceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/data/source/local/WeatherLocalDataSourceImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/ui/weather/WeatherFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/ui/weather/WeatherFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/ui/weather/WeatherViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/ui/weather/WeatherViewModel.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +121,7 @@
       <recent name="io.github.moh_mohsin.ahoyweatherapp.ui.settings" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.WeatherRemoteDataSourceImplTest.should return weather given lat and lon">
+  <component name="RunManager" selected="Android App.app">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -396,7 +390,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627127771584</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="add unit tests">
+      <created>1627147572352</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1627147572352</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -422,7 +423,8 @@
     <MESSAGE value="show weather of a certain city" />
     <MESSAGE value="UI fixes and clean up/more logs" />
     <MESSAGE value="add settings fragment and allow changing of temp scale (C/F)" />
-    <option name="LAST_COMMIT_MESSAGE" value="add settings fragment and allow changing of temp scale (C/F)" />
+    <MESSAGE value="add unit tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="add unit tests" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -479,22 +481,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="152" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627072249860" />
-    <state width="1491" height="222" key="GridCell.Tab.0.bottom" timestamp="1627145128953">
+    <state width="1491" height="288" key="GridCell.Tab.0.bottom" timestamp="1627148030490">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="222" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627145128953" />
-    <state width="1491" height="222" key="GridCell.Tab.0.center" timestamp="1627145128953">
+    <state width="1491" height="288" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627148030490" />
+    <state width="1491" height="288" key="GridCell.Tab.0.center" timestamp="1627148030489">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="222" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627145128953" />
-    <state width="1491" height="222" key="GridCell.Tab.0.left" timestamp="1627145128953">
+    <state width="1491" height="288" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627148030489" />
+    <state width="1491" height="288" key="GridCell.Tab.0.left" timestamp="1627148030489">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="222" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627145128953" />
-    <state width="1491" height="222" key="GridCell.Tab.0.right" timestamp="1627145128953">
+    <state width="1491" height="288" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627148030489" />
+    <state width="1491" height="288" key="GridCell.Tab.0.right" timestamp="1627148030489">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="222" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627145128953" />
+    <state width="1491" height="288" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627148030489" />
     <state width="1491" height="202" key="GridCell.Tab.1.bottom" timestamp="1627044487208">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -531,14 +533,14 @@
       <screen x="1920" y="0" width="1536" height="824" />
     </state>
     <state x="1895" y="-17" width="1505" height="780" maximized="true" key="dock-window-1/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627039580927" />
-    <state x="221" y="175" width="827" height="534" key="find.popup" timestamp="1627139105532">
+    <state x="221" y="175" width="827" height="534" key="find.popup" timestamp="1627147584694">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="221" y="175" width="827" height="534" key="find.popup/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627139105532" />
-    <state width="388" height="148" key="javadoc.popup.new" timestamp="1627144606928">
+    <state x="221" y="175" width="827" height="534" key="find.popup/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627147584694" />
+    <state width="388" height="148" key="javadoc.popup.new" timestamp="1627148013216">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="388" height="148" key="javadoc.popup.new/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627144606928" />
+    <state width="388" height="148" key="javadoc.popup.new/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627148013216" />
     <state x="466" y="186" key="org.jetbrains.kotlin.idea.testIntegration.KotlinCreateTestDialog" timestamp="1627143198913">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

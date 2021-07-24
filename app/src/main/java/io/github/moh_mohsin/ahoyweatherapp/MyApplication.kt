@@ -17,12 +17,11 @@ class MyApplication : Application(), KodeinAware {
     override val kodein by Kodein.lazy {
         bind<AppDatabase>() with singleton {
             Room.databaseBuilder(
-                //TODO: replace with databaseBuilder
                 applicationContext,
                 AppDatabase::class.java,
                 "ahoy-weather",
             )
-//                .createFromAsset("database/ahoy-weather.db")
+                .createFromAsset("database/ahoy-weather.db")
                 .build()
         }
         bind<AppPreference>() with singleton { AppPreference(applicationContext) }

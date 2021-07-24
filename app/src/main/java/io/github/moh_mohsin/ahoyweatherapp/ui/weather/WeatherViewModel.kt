@@ -31,9 +31,9 @@ class WeatherViewModel(app: Application) : AndroidViewModel(app), KodeinAware {
 //            Timber.d("db: start")
 //            val textFile = app.applicationContext.resources.openRawResource(R.raw.simplemaps_worldcities).bufferedReader().use { it.readText() }
 //            Timber.d("db: file read: size = ${textFile.length}")
-//            val cityDtos: List<CityDto> = Gson().fromJson(textFile, object : TypeToken<List<CityDto>>() {}.type)
-//            Timber.d("db: cityDtos ready: size = ${cityDtos.size}")
-//            cityRepository.insertAll(cityDtos)
+//            val cities: List<CityDto> = Gson().fromJson(textFile, object : TypeToken<List<CityDto>>() {}.type)
+//            Timber.d("db: cityDtos ready: size = ${cities.size}")
+//            cityRepository.insertAll(cities.map { it.toCity() })
 //            Timber.d("db: insertion done")
         }
     }
