@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/current_weather"
-        android:name="io.github.moh_mohsin.ahoyweatherapp.ui.weather.WeatherFragment"
+        android:name="io.github.moh_mohsin.ahoyweatherapp.ui.weather.CurrentWeatherFragment"
         android:label="@string/weather_label"
         tools:layout="@layout/weather_fragment" />
 

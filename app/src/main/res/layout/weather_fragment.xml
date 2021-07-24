@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:visibility="gone"
             tools:visibility="visible"
-            tools:context=".ui.weather.WeatherFragment">
+            tools:context=".ui.weather.CurrentWeatherFragment">
 
 
             <TextView

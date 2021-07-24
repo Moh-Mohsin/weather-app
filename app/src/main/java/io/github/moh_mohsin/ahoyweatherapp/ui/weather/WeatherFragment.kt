@@ -1,26 +1,14 @@
 package io.github.moh_mohsin.ahoyweatherapp.ui.weather
 
-import android.Manifest
-import android.annotation.SuppressLint
-import android.app.PendingIntent
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.location.Location
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationServices
-import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import io.github.moh_mohsin.ahoyweatherapp.MainActivity
 import io.github.moh_mohsin.ahoyweatherapp.R
 import io.github.moh_mohsin.ahoyweatherapp.data.Result
@@ -36,7 +24,7 @@ import timber.log.Timber
 import java.util.*
 
 
-class WeatherFragment : Fragment(R.layout.weather_fragment) {
+abstract class WeatherFragment : Fragment(R.layout.weather_fragment) {
 
     private val binding by viewBinding(WeatherFragmentBinding::bind)
     private val viewModel by viewModels<WeatherViewModel>()
@@ -54,49 +42,14 @@ class WeatherFragment : Fragment(R.layout.weather_fragment) {
         binding.hourlyWeatherList.adapter = hourlyWeatherAdapter
         binding.dailyWeatherList.adapter = dailyWeatherAdapter
 
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            getWeatherForCurrentLocation()
-        } else {
-            // use post to solve and issue with the permission library crashing because of FragmentManager
-            Handler(Looper.myLooper()!!).post {
-                runWithPermissions(Manifest.permission.ACCESS_FINE_LOCATION) {
-                    getWeatherForCurrentLocation()
-                }
-            }
-        }
-
         binding.retry.setOnClickListener {
-            getWeatherForCurrentLocation()
+            retry()
         }
     }
 
-    @SuppressLint("MissingPermission")
-    private fun getWeatherForCurrentLocation() {
-        val fusedLocationClient =
-            LocationServices.getFusedLocationProviderClient(requireActivity())
+    abstract fun retry()
 
-        val pendingIntent = PendingIntent.getActivities(
-            requireContext(), 0, arrayOf(Intent()),
-            PendingIntent.FLAG_ONE_SHOT
-        )
-        fusedLocationClient.requestLocationUpdates(LocationRequest.create(), pendingIntent)
-
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location: Location? ->
-                location?.let {
-                    subscribe(it.latitude, it.longitude)
-                } ?: run {
-                    showRetry(true)
-                    toast(R.string.location_not_available)
-                }
-            }
-    }
-
-    private fun subscribe(lat: Double, lon: Double) {
+    fun subscribe(lat: Double, lon: Double) {
         viewModel.getWeather(lat, lon).observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Error -> {
@@ -128,7 +81,7 @@ class WeatherFragment : Fragment(R.layout.weather_fragment) {
         binding.loading.showOrHide(show)
     }
 
-    private fun showRetry(show: Boolean) {
+    fun showRetry(show: Boolean) {
         binding.retry.showOrHide(show)
     }
 
