@@ -68,6 +68,10 @@ class WeatherFragment : Fragment(R.layout.weather_fragment) {
                 }
             }
         }
+
+        binding.retry.setOnClickListener {
+            getWeatherForCurrentLocation()
+        }
     }
 
     @SuppressLint("MissingPermission")
@@ -85,7 +89,10 @@ class WeatherFragment : Fragment(R.layout.weather_fragment) {
             .addOnSuccessListener { location: Location? ->
                 location?.let {
                     subscribe(it.latitude, it.longitude)
-                } ?: toast(R.string.location_not_available)
+                } ?: run {
+                    showRetry(true)
+                    toast(R.string.location_not_available)
+                }
             }
     }
 
@@ -93,20 +100,36 @@ class WeatherFragment : Fragment(R.layout.weather_fragment) {
         viewModel.getWeather(lat, lon).observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Error -> {
+                    showLoading(false)
+                    showContent(false)
+                    showRetry(true)
                     toast(result.exception.msg)
                 }
-                Result.Loading -> showLoading(true)
+                Result.Loading -> {
+                    showLoading(true)
+                    showContent(false)
+                    showRetry(false)
+                }
                 is Result.Success -> {
+                    showContent(true)
                     showLoading(false)
+                    showRetry(false)
                     bindViews(result.data)
                 }
             }
         }
     }
 
+    private fun showContent(show: Boolean) {
+        binding.content.showOrHide(show)
+    }
+
     private fun showLoading(show: Boolean) {
         binding.loading.showOrHide(show)
-        binding.content.showOrHide(!show)
+    }
+
+    private fun showRetry(show: Boolean) {
+        binding.retry.showOrHide(show)
     }
 
     private fun bindViews(weatherInfo: WeatherInfo) {

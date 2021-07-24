@@ -42,6 +42,10 @@ class CityWeatherFragment : Fragment(R.layout.weather_fragment) {
 
         (requireActivity() as MainActivity).supportActionBar?.title = args.city.name
         subscribe(args.city.lat, args.city.lng)
+
+        binding.retry.setOnClickListener {
+            subscribe(args.city.lat, args.city.lng)
+        }
     }
 
     private fun subscribe(lat: Double, lon: Double) {
@@ -49,20 +53,37 @@ class CityWeatherFragment : Fragment(R.layout.weather_fragment) {
             Timber.d("City Weather: $result")
             when (result) {
                 is Result.Error -> {
+                    showLoading(false)
+                    showContent(false)
+                    showRetry(true)
                     toast(result.exception.msg)
                 }
-                Result.Loading -> showLoading(true)
+                Result.Loading -> {
+                    showLoading(true)
+                    showContent(false)
+                    showRetry(false)
+                }
                 is Result.Success -> {
+                    showContent(true)
                     showLoading(false)
+                    showRetry(false)
                     bindViews(result.data)
                 }
             }
         }
     }
 
+
+    private fun showContent(show: Boolean) {
+        binding.content.showOrHide(show)
+    }
+
     private fun showLoading(show: Boolean) {
         binding.loading.showOrHide(show)
-        binding.content.showOrHide(!show)
+    }
+
+    private fun showRetry(show: Boolean) {
+        binding.retry.showOrHide(show)
     }
 
     private fun bindViews(weatherInfo: WeatherInfo) {
