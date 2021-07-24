@@ -1,6 +1,7 @@
 package io.github.moh_mohsin.ahoyweatherapp.data.source.remote
 
 import io.github.moh_mohsin.ahoyweatherapp.BuildConfig
+import io.github.moh_mohsin.ahoyweatherapp.data.NetworkException
 import io.github.moh_mohsin.ahoyweatherapp.data.Result
 import io.github.moh_mohsin.ahoyweatherapp.data.source.WeatherRemoteDataSource
 import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.TempScale
@@ -17,9 +18,12 @@ class WeatherRemoteDataSourceImpl(private val openWeatherApi: OpenWeatherApi) :
         lon: Double,
         tempScale: TempScale
     ): StateFlow<Result<WeatherInfoDto>> {
-        val result =
+        val result = try {
             openWeatherApi.oneCall(lat, lon, BuildConfig.OPEN_WEATHER_API_KEY, tempScale.toString())
                 .handle()
+        } catch (e: Exception) {
+            Result.Error(NetworkException())
+        }
         return MutableStateFlow(result)
     }
 }
