@@ -68,7 +68,6 @@ class WeatherRepositoryImpl(
     }
 
     private fun refreshWeather(lat: Double, lon: Double) {
-        //TODO: use a different scope?
         CoroutineScope(coroutineContext).launch {
             if (remoteWeatherStateFlow.value is Result.Error) {
                 remoteWeatherStateFlow.value = Result.Loading

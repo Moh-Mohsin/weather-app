@@ -19,17 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9677757b-31a2-4bea-a598-7dd3132739e6" name="Default Changelist" comment="update readme">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/data/Transformations.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/data/Transformations.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/data/model/TempUnit.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/data/model/WeatherInfo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/data/model/WeatherInfo.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/data/repository/impl/WeatherRepositoryImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/data/repository/impl/WeatherRepositoryImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/ui/weather/WeatherFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/ui/weather/WeatherFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/ui/weather/WeatherViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/ui/weather/WeatherViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/weather_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/weather_fragment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-    </list>
+    <list default="true" id="9677757b-31a2-4bea-a598-7dd3132739e6" name="Default Changelist" comment="update readme" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -473,7 +463,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627158097519</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="add wind speed and humidity (with appropriate units) to weather details">
+      <created>1627160128297</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1627160128297</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -509,7 +506,8 @@
     <MESSAGE value="fix a crash caused by network exceptions" />
     <MESSAGE value="allow re-trying in weather fragments" />
     <MESSAGE value="add a parent class WeatherFragment to remove duplicate code in weather fragments" />
-    <option name="LAST_COMMIT_MESSAGE" value="add a parent class WeatherFragment to remove duplicate code in weather fragments" />
+    <MESSAGE value="add wind speed and humidity (with appropriate units) to weather details" />
+    <option name="LAST_COMMIT_MESSAGE" value="add wind speed and humidity (with appropriate units) to weather details" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -558,10 +556,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="349" y="167" key="AndroidCreateResourceFileDialog/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627125370054" />
-    <state x="928" y="202" key="AndroidCreateXmlResourceDialog" timestamp="1627158671382">
+    <state x="928" y="202" key="AndroidCreateXmlResourceDialog" timestamp="1627159829324">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="928" y="202" key="AndroidCreateXmlResourceDialog/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627158671382" />
+    <state x="928" y="202" key="AndroidCreateXmlResourceDialog/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627159829324" />
     <state width="442" height="466" key="DebuggerActiveHint" timestamp="1627044407228">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -570,22 +568,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="152" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627148118601" />
-    <state width="1491" height="198" key="GridCell.Tab.0.bottom" timestamp="1627156433773">
+    <state width="1491" height="198" key="GridCell.Tab.0.bottom" timestamp="1627159853096">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="198" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627156433773" />
-    <state width="1491" height="198" key="GridCell.Tab.0.center" timestamp="1627156433773">
+    <state width="1491" height="198" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627159853096" />
+    <state width="1491" height="198" key="GridCell.Tab.0.center" timestamp="1627159853095">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="198" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627156433773" />
-    <state width="1491" height="198" key="GridCell.Tab.0.left" timestamp="1627156433773">
+    <state width="1491" height="198" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627159853095" />
+    <state width="1491" height="198" key="GridCell.Tab.0.left" timestamp="1627159853095">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="198" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627156433773" />
-    <state width="1491" height="198" key="GridCell.Tab.0.right" timestamp="1627156433773">
+    <state width="1491" height="198" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627159853095" />
+    <state width="1491" height="198" key="GridCell.Tab.0.right" timestamp="1627159853096">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="198" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627156433773" />
+    <state width="1491" height="198" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627159853096" />
     <state width="1491" height="202" key="GridCell.Tab.1.bottom" timestamp="1627156155378">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -606,10 +604,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="498" height="558" key="SwitcherDM/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627143163116" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1627158102100">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1627160130427">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627158102100" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627160130427" />
     <state x="584" y="190" key="chooseDestDirectoryDialog" timestamp="1627143198887">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -642,10 +640,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627157111905" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1627159581555">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1627160103494">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627159581555" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627160103494" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
