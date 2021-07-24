@@ -59,7 +59,15 @@ class WeatherRepositoryImpl(
         return res
     }
 
-    override fun refreshWeather(lat: Double, lon: Double) {
+    override suspend fun getWeatherOnline(lat: Double, lon: Double): Result<WeatherInfo> {
+        return weatherRemoteDataSource.getWeather(
+            lat,
+            lon,
+            appPreference.getTempScale()
+        ).value.map { it.toWeatherInfo() }
+    }
+
+    private fun refreshWeather(lat: Double, lon: Double) {
         //TODO: use a different scope?
         CoroutineScope(coroutineContext).launch {
             if (remoteWeatherStateFlow.value is Result.Error) {
