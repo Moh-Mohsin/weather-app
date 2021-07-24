@@ -46,6 +46,7 @@ class CityWeatherFragment : Fragment(R.layout.weather_fragment) {
 
     private fun subscribe(lat: Double, lon: Double) {
         viewModel.getWeather(lat, lon).observe(viewLifecycleOwner) { result ->
+            Timber.d("City Weather: $result")
             when (result) {
                 is Result.Error -> {
                     toast(result.exception.msg)

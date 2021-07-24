@@ -27,7 +27,7 @@ val appDependencies = Kodein.Module("app") {
     bind<OpenWeatherApi>() with singleton { OpenWeatherService().getService() }
     bind<WeatherLocalDataSource>() with singleton { WeatherLocalDataSourceImpl(instance()) }
     bind<WeatherRemoteDataSource>() with singleton { WeatherRemoteDataSourceImpl(instance()) }
-    bind<WeatherRepository>() with provider { WeatherRepositoryImpl(instance(), instance()) }
+    bind<WeatherRepository>() with singleton { WeatherRepositoryImpl(instance(), instance()) }
 
     bind<GetWeatherUseCase>() with provider { GetWeatherUseCase(instance()) }
 }

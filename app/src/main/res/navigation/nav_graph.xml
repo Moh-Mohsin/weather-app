@@ -8,13 +8,13 @@
     <fragment
         android:id="@+id/current_weather"
         android:name="io.github.moh_mohsin.ahoyweatherapp.ui.weather.WeatherFragment"
-        android:label="weather_fragment"
+        android:label="@string/weather_label"
         tools:layout="@layout/weather_fragment" />
 
     <fragment
         android:id="@+id/cityWeatherFragment"
         android:name="io.github.moh_mohsin.ahoyweatherapp.ui.weather.CityWeatherFragment"
-        android:label="weather_fragment"
+        android:label=""
         tools:layout="@layout/weather_fragment">
         <argument
             android:name="city"
@@ -24,12 +24,12 @@
     <fragment
         android:id="@+id/favorite_cities"
         android:name="io.github.moh_mohsin.ahoyweatherapp.ui.city.FavoriteCitiesFragment"
-        android:label="cities_fragment"
+        android:label="@string/favorite_cities_label"
         tools:layout="@layout/favorite_cities_fragment" />
     <fragment
         android:id="@+id/citySearchFragment"
         android:name="io.github.moh_mohsin.ahoyweatherapp.ui.citysearch.CitySearchFragment"
-        android:label="city_search_fragment"
+        android:label="@string/search_label"
         tools:layout="@layout/city_search_fragment" />
 
     <action

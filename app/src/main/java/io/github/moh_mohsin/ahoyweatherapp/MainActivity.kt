@@ -1,8 +1,9 @@
 package io.github.moh_mohsin.ahoyweatherapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.widget.Toolbar
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -30,12 +31,35 @@ class MainActivity : AppCompatActivity() {
             bottom_navigation,
             navHostFragment!!.navController
         )
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            handleDestinationChange(destination)
+        }
+    }
 
+    private fun handleDestinationChange(destination: NavDestination) {
+        when (destination.id) {
+            in appBarConfiguration.topLevelDestinations -> {
+                showNav()
+            }
+            else -> {
+                hideNav()
+            }
+        }
+    }
+
+    private fun hideNav() {
+        bottom_navigation.visibility = View.GONE
+    }
+
+    private fun showNav() {
+        bottom_navigation.visibility = View.VISIBLE
     }
 
     private fun buildAppBarConfiguration(): AppBarConfiguration {
-        return AppBarConfiguration.Builder(hashSetOf()).build()
+        return AppBarConfiguration.Builder(hashSetOf(R.id.current_weather, R.id.favorite_cities))
+            .build()
     }
+
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }

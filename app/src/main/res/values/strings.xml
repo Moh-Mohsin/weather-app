@@ -15,4 +15,7 @@
     <string name="no_result_matching">Nothing found matching your query</string>
     <string name="search_result_here">Your search results will appear here</string>
     <string name="content_desc_favorite_a_city">Favorite a city</string>
+    <string name="favorite_cities_label">Favorite Cities</string>
+    <string name="weather_label">Weather</string>
+    <string name="search_label">Search Cities</string>
 </resources>
