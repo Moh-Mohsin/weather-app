@@ -95,7 +95,7 @@ class CitySearchFragment : Fragment(R.layout.city_search_fragment), SearchView.O
     }
 
     override fun onQueryTextChange(newText: String): Boolean {
-//        viewModel.setSearchQuery(newText)
+        viewModel.setSearchQuery(newText)
         return true
     }
 

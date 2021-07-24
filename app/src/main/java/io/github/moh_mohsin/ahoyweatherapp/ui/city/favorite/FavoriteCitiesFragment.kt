@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import io.github.moh_mohsin.ahoyweatherapp.R
 import io.github.moh_mohsin.ahoyweatherapp.databinding.FavoriteCitiesFragmentBinding
 import io.github.moh_mohsin.ahoyweatherapp.ui.city.adapter.CityAdapter
-import io.github.moh_mohsin.ahoyweatherapp.util.toast
+import io.github.moh_mohsin.ahoyweatherapp.util.showOrHide
 import io.github.moh_mohsin.ahoyweatherapp.util.viewBinding
 
 class FavoriteCitiesFragment : Fragment(R.layout.favorite_cities_fragment) {
@@ -27,7 +27,6 @@ class FavoriteCitiesFragment : Fragment(R.layout.favorite_cities_fragment) {
             val action = FavoriteCitiesFragmentDirections.actionGlobalCityWeatherFragment(it.city)
             findNavController().navigate(action)
         }, removeFromFavorite = {
-            toast("${it.city.name} Removed from favorites")
             viewModel.removeFromFavorite(it.city)
         })
         binding.favoriteCitiesList.adapter = adapter
@@ -35,6 +34,7 @@ class FavoriteCitiesFragment : Fragment(R.layout.favorite_cities_fragment) {
             findNavController().navigate(R.id.citySearchFragment)
         }
         viewModel.favoriteCities.observe(viewLifecycleOwner) { favoriteCities ->
+            binding.emptyList.showOrHide(favoriteCities.isEmpty())
             adapter.submitList(favoriteCities)
         }
     }

@@ -52,9 +52,14 @@ class CitySearchViewModel(app: Application) : AndroidViewModel(app), KodeinAware
     }
 
     private fun searchCities(query: String) {
-        if (query.isBlank()) return
+        if (query.isBlank()) {
+            _state.value = State.Idle
+            return
+        }
         viewModelScope.launch {
-            _state.value = State.Loading
+            if (_state.value !is State.Data) {
+                _state.value = State.Loading
+            }
             val result = searchCitiesUseCase(query) //TODO: error handling?
             _state.value = State.Data(result)
         }

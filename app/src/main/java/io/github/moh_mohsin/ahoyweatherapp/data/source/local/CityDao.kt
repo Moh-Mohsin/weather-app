@@ -2,7 +2,6 @@ package io.github.moh_mohsin.ahoyweatherapp.data.source.local
 
 import androidx.room.*
 import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.CityDto
-import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.WeatherInfoDto
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -14,7 +13,7 @@ interface CityDao {
     suspend fun insertAll(vararg cityDto: CityDto): List<Long>
 
 
-    @Query("SELECT * FROM cities WHERE city LIKE '%'||:query||'%' OR country LIKE '%'||:query||'%'")
+    @Query("SELECT * FROM cities WHERE city LIKE '%'||:query||'%' OR country LIKE '%'||:query||'%' LIMIT 100")
     suspend fun findByNameOrCountry(query: String): List<CityDto>
 
 
