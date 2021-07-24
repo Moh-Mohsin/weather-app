@@ -35,4 +35,5 @@
 
     <string name="temp_scale_key" translatable="false">temp_scale</string>
     <string name="daily_weather_notification_key" translatable="false">daily_weather_notification</string>
+    <string name="location_not_available">Location not available</string>
 </resources>

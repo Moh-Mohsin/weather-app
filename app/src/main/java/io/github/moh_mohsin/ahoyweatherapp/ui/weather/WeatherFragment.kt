@@ -2,6 +2,8 @@ package io.github.moh_mohsin.ahoyweatherapp.ui.weather
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.PendingIntent
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -16,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import io.github.moh_mohsin.ahoyweatherapp.MainActivity
@@ -31,6 +34,7 @@ import io.github.moh_mohsin.ahoyweatherapp.util.toast
 import io.github.moh_mohsin.ahoyweatherapp.util.viewBinding
 import timber.log.Timber
 import java.util.*
+
 
 class WeatherFragment : Fragment(R.layout.weather_fragment) {
 
@@ -70,11 +74,18 @@ class WeatherFragment : Fragment(R.layout.weather_fragment) {
     private fun getWeatherForCurrentLocation() {
         val fusedLocationClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
+
+        val pendingIntent = PendingIntent.getActivities(
+            requireContext(), 0, arrayOf(Intent()),
+            PendingIntent.FLAG_ONE_SHOT
+        )
+        fusedLocationClient.requestLocationUpdates(LocationRequest.create(), pendingIntent)
+
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 location?.let {
                     subscribe(it.latitude, it.longitude)
-                } ?: toast("Location not available")
+                } ?: toast(R.string.location_not_available)
             }
     }
 
