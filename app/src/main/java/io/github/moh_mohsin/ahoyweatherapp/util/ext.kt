@@ -4,12 +4,9 @@ import com.google.gson.Gson
 import io.github.moh_mohsin.ahoyweatherapp.data.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Call
 import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 
 suspend fun <T> Response<T>.handle(): Result<T> {

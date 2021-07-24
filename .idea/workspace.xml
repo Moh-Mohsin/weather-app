@@ -19,7 +19,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9677757b-31a2-4bea-a598-7dd3132739e6" name="Default Changelist" comment="update readme" />
+    <list default="true" id="9677757b-31a2-4bea-a598-7dd3132739e6" name="Default Changelist" comment="update readme">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/MyApplication.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/MyApplication.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/ui/city/search/CitySearchViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/ui/city/search/CitySearchViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/ui/weather/WeatherFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/ui/weather/WeatherFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/util/DateExt.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/util/DateExt.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/util/UiExt.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/util/UiExt.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/util/ext.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/util/ext.kt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,7 +78,7 @@
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="dynamic.classpath" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/test/java/io/github/moh_mohsin/ahoyweatherapp/data" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/assets/database" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../retry/ahoy-weather-app-2" />
     <property name="multi-representation-previewC:/Users/mohamed/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_selected" value="Custom views" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
     <property name="show.migrate.to.gradle.popup" value="false" />
@@ -470,7 +479,21 @@
       <option name="project" value="LOCAL" />
       <updated>1627160128297</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="clean up">
+      <created>1627160237256</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1627160237256</updated>
+    </task>
+    <task id="LOCAL-00024" summary="search as the text in the search box changes">
+      <created>1627161189862</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1627161189862</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -507,7 +530,9 @@
     <MESSAGE value="allow re-trying in weather fragments" />
     <MESSAGE value="add a parent class WeatherFragment to remove duplicate code in weather fragments" />
     <MESSAGE value="add wind speed and humidity (with appropriate units) to weather details" />
-    <option name="LAST_COMMIT_MESSAGE" value="add wind speed and humidity (with appropriate units) to weather details" />
+    <MESSAGE value="clean up" />
+    <MESSAGE value="search as the text in the search box changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="search as the text in the search box changes" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -536,10 +561,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="417" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627074250549" />
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1627155453643">
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1627162336837">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627155453643" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627162336837" />
     <state x="519" y="144" width="512" height="536" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1627154987176">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -564,10 +589,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="442" height="466" key="DebuggerActiveHint/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627044407228" />
-    <state x="549" y="152" key="FileChooserDialogImpl" timestamp="1627148118601">
+    <state x="549" y="152" key="FileChooserDialogImpl" timestamp="1627161863090">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="152" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627148118601" />
+    <state x="549" y="152" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627161863090" />
     <state width="1491" height="198" key="GridCell.Tab.0.bottom" timestamp="1627159853096">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -604,10 +629,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="498" height="558" key="SwitcherDM/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627143163116" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1627160130427">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1627162032717">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627160130427" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627162032717" />
     <state x="584" y="190" key="chooseDestDirectoryDialog" timestamp="1627143198887">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -620,14 +645,14 @@
       <screen x="1920" y="0" width="1536" height="824" />
     </state>
     <state x="1895" y="-17" width="1505" height="780" maximized="true" key="dock-window-1/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627039580927" />
-    <state x="221" y="175" width="827" height="534" key="find.popup" timestamp="1627154025637">
+    <state x="221" y="175" width="827" height="534" key="find.popup" timestamp="1627161747325">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="221" y="175" width="827" height="534" key="find.popup/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627154025637" />
-    <state width="388" height="88" key="javadoc.popup.new" timestamp="1627159674627">
+    <state x="221" y="175" width="827" height="534" key="find.popup/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627161747325" />
+    <state width="388" height="88" key="javadoc.popup.new" timestamp="1627160930200">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="388" height="88" key="javadoc.popup.new/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627159674627" />
+    <state width="388" height="88" key="javadoc.popup.new/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627160930200" />
     <state x="466" y="186" key="org.jetbrains.kotlin.idea.testIntegration.KotlinCreateTestDialog" timestamp="1627143198913">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -640,10 +665,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627157111905" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1627160103494">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1627160840205">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627160103494" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1627160840205" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -655,7 +680,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/io/github/moh_mohsin/ahoyweatherapp/util/ext.kt</url>
-          <line>16</line>
+          <line>13</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">

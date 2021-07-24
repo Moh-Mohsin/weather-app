@@ -17,8 +17,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Set up ActionBar
-//        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         setupActionBarWithNavController(navController, appBarConfiguration)
         setUpNavigation()
@@ -31,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             bottom_navigation,
             navHostFragment!!.navController
         )
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             handleDestinationChange(destination)
         }
     }

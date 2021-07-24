@@ -91,13 +91,6 @@ sealed class State<out T> {
     object Idle : State<Nothing>()
 }
 
-fun <T> State<List<T>>.filter(predicate: (T) -> Boolean): State<List<T>> {
-    return when (this) {
-        is State.Data -> State.Data(data.filter(predicate))
-        else -> this
-    }
-}
-
 fun <T, R> State<List<T>>.map(transform: (T) -> R): State<List<R>> {
     return when (this) {
         is State.Data -> State.Data(data.map(transform))

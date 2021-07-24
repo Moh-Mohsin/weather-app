@@ -1,5 +1,6 @@
 package io.github.moh_mohsin.ahoyweatherapp.ui.weather
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -86,6 +87,7 @@ abstract class WeatherFragment : Fragment(R.layout.weather_fragment) {
         binding.retry.showOrHide(show)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun bindViews(weatherInfo: WeatherInfo) {
         val todayWeather = weatherInfo.daily.firstOrNull { it.dt.getDateDiff(Date()) == 0L }
         Timber.d("todayWeather: $todayWeather")

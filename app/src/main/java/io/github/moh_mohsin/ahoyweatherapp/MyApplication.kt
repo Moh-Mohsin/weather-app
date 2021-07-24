@@ -45,7 +45,7 @@ class MyApplication : Application(), KodeinAware {
         setupDailyWeatherNotificationJob()
     }
 
-    fun setupDailyWeatherNotificationJob() {
+    private fun setupDailyWeatherNotificationJob() {
         val notificationHour = 6
 
         val plusDay = if (DateTime.now().hourOfDay < notificationHour) 1 else 0
