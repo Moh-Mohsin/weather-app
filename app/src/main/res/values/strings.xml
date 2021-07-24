@@ -9,4 +9,10 @@
     <string name="error_network">Connection error occurred</string>
     <string name="error_unknown">Unknown error, please try again</string>
     <string name="error_server">Server error, please try again later</string>
+    <string name="no_favorites_added">No favorites added</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">Search</string>
+    <string name="no_result_matching">Nothing found matching your query</string>
+    <string name="search_result_here">Your search results will appear here</string>
+    <string name="content_desc_favorite_a_city">Favorite a city</string>
 </resources>

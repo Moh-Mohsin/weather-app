@@ -15,4 +15,11 @@
         android:name="io.github.moh_mohsin.ahoyweatherapp.ui.city.CitiesFragment"
         android:label="cities_fragment"
         tools:layout="@layout/cities_fragment" />
+    <fragment
+        android:id="@+id/citySearchFragment"
+        android:name="io.github.moh_mohsin.ahoyweatherapp.ui.citysearch.CitySearchFragment"
+        android:label="city_search_fragment"
+        tools:layout="@layout/city_search_fragment" />
+
+
 </navigation>

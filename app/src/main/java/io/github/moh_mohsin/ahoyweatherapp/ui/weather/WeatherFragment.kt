@@ -31,7 +31,7 @@ import java.util.*
 class WeatherFragment : Fragment(R.layout.weather_fragment) {
 
     private val binding by viewBinding(WeatherFragmentBinding::bind)
-    private val viewModel: WeatherViewModel by viewModels()
+    private val viewModel by viewModels<WeatherViewModel>()
 
     lateinit var hourlyWeatherAdapter: HourlyWeatherAdapter
     lateinit var dailyWeatherAdapter: DailyWeatherAdapter
@@ -68,6 +68,7 @@ class WeatherFragment : Fragment(R.layout.weather_fragment) {
                         } ?: toast("Location not available")
                     }
             }
+            viewModel
         }
     }
 
@@ -94,7 +95,7 @@ class WeatherFragment : Fragment(R.layout.weather_fragment) {
 
         Timber.d("hourly: ${hourly.size}")
         Timber.d("daily: ${daily.size}")
-
+        Timber.d("current: ${weatherInfo.current}")
         hourlyWeatherAdapter.submitList(hourly)
         dailyWeatherAdapter.submitList(daily)
     }
