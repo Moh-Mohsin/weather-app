@@ -26,7 +26,7 @@
         app:layout_constraintEnd_toStartOf="@+id/favorite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Khartoum (Sudan)" />
+        tools:text="@tools:sample/cities" />
 
     <View
         android:layout_width="match_parent"
