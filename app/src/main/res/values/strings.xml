@@ -39,4 +39,8 @@
     <string name="todays_weather">Today\'s weather</string>
     <string name="weather_channel_name">Weather</string>
     <string name="retry">retry</string>
+    <string name="humidity_value">"Humidity: %d%%"</string>
+    <string name="wind_speed_value">"Wind Speed: %.0f %s"</string>
+    <string name="meter_second">meter/second</string>
+    <string name="miles_hour">miles/hour</string>
 </resources>

@@ -1,5 +1,7 @@
 package io.github.moh_mohsin.ahoyweatherapp.data.model
 
+import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.TempScale
+
 data class WeatherInfo(
     val lat: Double,
     val lon: Double,
@@ -8,5 +10,5 @@ data class WeatherInfo(
     val current: WeatherDetail,
     val daily: List<Daily>,
     var hourly: List<WeatherDetail>,
-    val tempUnit: TempUnit = TempUnit.CELSIUS
+    val tempScale: TempScale = TempScale.METRIC
 )

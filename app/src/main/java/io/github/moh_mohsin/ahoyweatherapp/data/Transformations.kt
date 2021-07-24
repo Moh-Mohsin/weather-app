@@ -53,7 +53,16 @@ fun WeatherDetailDto.toWeatherDetail() = WeatherDetail(
     weather.map { it.toWeatherDesc() },
 )
 
-fun WeatherInfoDto.toWeatherInfo() = WeatherInfo(lat, lon, timezone, timezoneOffset, current.toWeatherDetail(), daily.map { it.toDaily() }, hourly.map { it.toWeatherDetail() })
+fun WeatherInfoDto.toWeatherInfo(tempScale: TempScale) = WeatherInfo(
+    lat,
+    lon,
+    timezone,
+    timezoneOffset,
+    current.toWeatherDetail(),
+    daily.map { it.toDaily() },
+    hourly.map { it.toWeatherDetail() },
+    tempScale = tempScale
+)
 
 fun CityDto.toCity() = City(id, city, cityAscii, lat, lng, country, iso2, iso3, adminName, capital)
 fun City.toCityDto() = CityDto(id, name, nameAscii, lat, lng, country, iso2, iso3, adminName, capital)

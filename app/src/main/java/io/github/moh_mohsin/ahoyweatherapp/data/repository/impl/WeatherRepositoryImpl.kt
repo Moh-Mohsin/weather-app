@@ -51,7 +51,7 @@ class WeatherRepositoryImpl(
             }.map { flow ->
                 flow.map { result ->
 //                    Timber.d("combine result: ${result.toString().length}")
-                    result.toWeatherInfo()
+                    result.toWeatherInfo(appPreference.getTempScale())
                 }
             }
 
@@ -64,7 +64,7 @@ class WeatherRepositoryImpl(
             lat,
             lon,
             appPreference.getTempScale()
-        ).value.map { it.toWeatherInfo() }
+        ).value.map { it.toWeatherInfo(appPreference.getTempScale()) }
     }
 
     private fun refreshWeather(lat: Double, lon: Double) {

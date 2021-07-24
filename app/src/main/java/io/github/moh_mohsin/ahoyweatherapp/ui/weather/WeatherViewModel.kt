@@ -7,7 +7,6 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import io.github.moh_mohsin.ahoyweatherapp.data.Result
 import io.github.moh_mohsin.ahoyweatherapp.data.model.WeatherInfo
-import io.github.moh_mohsin.ahoyweatherapp.data.repository.CityRepository
 import io.github.moh_mohsin.ahoyweatherapp.domain.GetWeatherUseCase
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -19,7 +18,6 @@ class WeatherViewModel(app: Application) : AndroidViewModel(app), KodeinAware {
     override val kodein by kodein(app)
 
     private val getWeatherUseCase by instance<GetWeatherUseCase>()
-    private val cityRepository by instance<CityRepository>()
 
     fun getWeather(lat: Double, lon: Double): LiveData<Result<WeatherInfo>> {
         return getWeatherUseCase(lat, lon).asLiveData()

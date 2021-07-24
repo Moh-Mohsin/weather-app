@@ -13,6 +13,7 @@ import io.github.moh_mohsin.ahoyweatherapp.MainActivity
 import io.github.moh_mohsin.ahoyweatherapp.R
 import io.github.moh_mohsin.ahoyweatherapp.data.Result
 import io.github.moh_mohsin.ahoyweatherapp.data.model.WeatherInfo
+import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.TempScale
 import io.github.moh_mohsin.ahoyweatherapp.databinding.WeatherFragmentBinding
 import io.github.moh_mohsin.ahoyweatherapp.ui.weather.adapter.DailyWeatherAdapter
 import io.github.moh_mohsin.ahoyweatherapp.ui.weather.adapter.HourlyWeatherAdapter
@@ -97,8 +98,16 @@ abstract class WeatherFragment : Fragment(R.layout.weather_fragment) {
                 binding.weatherDesc.text = weather.description
                 binding.weatherIcon.load(weather.icon)
             }
+            binding.humidity.text = getString(R.string.humidity_value, it.humidity)
+            val windSpeedStr = when (weatherInfo.tempScale) {
+                TempScale.METRIC -> getString(R.string.meter_second)
+                TempScale.IMPERIAL -> getString(R.string.miles_hour)
+            }
+            binding.windSpeed.text =
+                getString(R.string.wind_speed_value, it.windSpeed, windSpeedStr)
+
         } ?: run {
-            toast("Updating cache...")
+            Timber.d("should update cache...")
         }
         val hourly = weatherInfo.hourly.filter { it.dt.getDateDiff(Date()) == 0L }
         val daily = weatherInfo.daily.drop(1) //remove first day since its the current day
