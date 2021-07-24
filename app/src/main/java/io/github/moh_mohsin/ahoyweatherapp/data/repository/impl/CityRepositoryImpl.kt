@@ -3,17 +3,16 @@ package io.github.moh_mohsin.ahoyweatherapp.data.repository.impl
 import io.github.moh_mohsin.ahoyweatherapp.data.Result
 import io.github.moh_mohsin.ahoyweatherapp.data.model.City
 import io.github.moh_mohsin.ahoyweatherapp.data.repository.CityRepository
-import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.CityDto
 import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.FavoriteCityDto
 import io.github.moh_mohsin.ahoyweatherapp.data.source.local.AppDatabase
-import io.github.moh_mohsin.ahoyweatherapp.data.source.local.CityDao
 import io.github.moh_mohsin.ahoyweatherapp.data.toCity
+import io.github.moh_mohsin.ahoyweatherapp.data.toCityDto
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class CityRepositoryImpl(private val db: AppDatabase) : CityRepository {
-    override suspend fun insertAll(citiesDto: List<CityDto>): Result<Unit> {
-        db.cityDao().insertAll(*citiesDto.toTypedArray())
+    override suspend fun insertAll(cities: List<City>): Result<Unit> {
+        db.cityDao().insertAll(*cities.map { it.toCityDto() }.toTypedArray())
         return Result.Success(Unit)
     }
 
