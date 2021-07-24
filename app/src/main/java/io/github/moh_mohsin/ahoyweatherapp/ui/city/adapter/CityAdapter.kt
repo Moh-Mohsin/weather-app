@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import io.github.moh_mohsin.ahoyweatherapp.R
 import io.github.moh_mohsin.ahoyweatherapp.databinding.SingleCityBinding
-import io.github.moh_mohsin.ahoyweatherapp.ui.citysearch.CityWithFavorite
+import io.github.moh_mohsin.ahoyweatherapp.ui.city.search.CityWithFavorite
 
 class CityAdapter(
     private val onClick: (CityWithFavorite) -> Unit,

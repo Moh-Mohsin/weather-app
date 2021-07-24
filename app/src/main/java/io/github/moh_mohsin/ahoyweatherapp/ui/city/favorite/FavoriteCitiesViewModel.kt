@@ -1,4 +1,4 @@
-package io.github.moh_mohsin.ahoyweatherapp.ui.city
+package io.github.moh_mohsin.ahoyweatherapp.ui.city.favorite
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import io.github.moh_mohsin.ahoyweatherapp.data.model.City
 import io.github.moh_mohsin.ahoyweatherapp.domain.GetFavoriteCitiesUseCase
 import io.github.moh_mohsin.ahoyweatherapp.domain.RemoveCityFromFavoritesUseCase
-import io.github.moh_mohsin.ahoyweatherapp.ui.citysearch.CityWithFavorite
+import io.github.moh_mohsin.ahoyweatherapp.ui.city.search.CityWithFavorite
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware

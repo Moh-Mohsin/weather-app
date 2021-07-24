@@ -1,4 +1,4 @@
-package io.github.moh_mohsin.ahoyweatherapp.ui.citysearch
+package io.github.moh_mohsin.ahoyweatherapp.ui.city.search
 
 import android.app.Application
 import androidx.lifecycle.*

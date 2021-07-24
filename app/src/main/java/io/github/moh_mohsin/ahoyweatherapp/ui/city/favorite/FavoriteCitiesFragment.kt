@@ -1,4 +1,4 @@
-package io.github.moh_mohsin.ahoyweatherapp.ui.city
+package io.github.moh_mohsin.ahoyweatherapp.ui.city.favorite
 
 import android.os.Bundle
 import android.view.Menu
@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import io.github.moh_mohsin.ahoyweatherapp.R
 import io.github.moh_mohsin.ahoyweatherapp.databinding.FavoriteCitiesFragmentBinding
 import io.github.moh_mohsin.ahoyweatherapp.ui.city.adapter.CityAdapter
-import io.github.moh_mohsin.ahoyweatherapp.ui.citysearch.CitySearchFragmentDirections
 import io.github.moh_mohsin.ahoyweatherapp.util.toast
 import io.github.moh_mohsin.ahoyweatherapp.util.viewBinding
 
@@ -25,7 +24,7 @@ class FavoriteCitiesFragment : Fragment(R.layout.favorite_cities_fragment) {
         setHasOptionsMenu(true)
 
         val adapter = CityAdapter(onClick = {
-            val action = CitySearchFragmentDirections.actionGlobalCityWeatherFragment(it.city)
+            val action = FavoriteCitiesFragmentDirections.actionGlobalCityWeatherFragment(it.city)
             findNavController().navigate(action)
         }, removeFromFavorite = {
             toast("${it.city.name} Removed from favorites")
