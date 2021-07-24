@@ -9,4 +9,6 @@ interface WeatherRepository {
     fun getWeather(lat: Double, lon: Double): Flow<Result<WeatherInfo>>
 
     fun refreshWeather(lat: Double, lon: Double)
+
+    suspend fun cleanCache()
 }

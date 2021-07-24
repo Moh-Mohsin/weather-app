@@ -1,6 +1,9 @@
 package io.github.moh_mohsin.ahoyweatherapp.ui.city
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,6 +22,7 @@ class FavoriteCitiesFragment : Fragment(R.layout.favorite_cities_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
 
         val adapter = CityAdapter(onClick = {
             val action = CitySearchFragmentDirections.actionGlobalCityWeatherFragment(it.city)
@@ -33,6 +37,21 @@ class FavoriteCitiesFragment : Fragment(R.layout.favorite_cities_fragment) {
         }
         viewModel.favoriteCities.observe(viewLifecycleOwner) { favoriteCities ->
             adapter.submitList(favoriteCities)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_options, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_settings -> {
+                findNavController().navigate(R.id.settingsFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

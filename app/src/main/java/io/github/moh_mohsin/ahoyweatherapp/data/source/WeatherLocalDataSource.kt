@@ -9,4 +9,5 @@ interface WeatherLocalDataSource {
 
     suspend fun saveWeather(weatherInfoDto: WeatherInfoDto)
 
+    suspend fun cleanCache()
 }

@@ -6,6 +6,7 @@ import io.github.moh_mohsin.ahoyweatherapp.data.repository.WeatherRepository
 import io.github.moh_mohsin.ahoyweatherapp.data.source.WeatherLocalDataSource
 import io.github.moh_mohsin.ahoyweatherapp.data.source.WeatherRemoteDataSource
 import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.WeatherInfoDto
+import io.github.moh_mohsin.ahoyweatherapp.data.source.local.AppPreference
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -19,6 +20,7 @@ import kotlin.coroutines.CoroutineContext
 class WeatherRepositoryImpl(
     private val weatherLocalDataSource: WeatherLocalDataSource,
     private val weatherRemoteDataSource: WeatherRemoteDataSource,
+    private val appPreference: AppPreference,
     private val coroutineContext: CoroutineContext = Dispatchers.IO
 ) : WeatherRepository {
 
@@ -64,12 +66,17 @@ class WeatherRepositoryImpl(
                 remoteWeatherStateFlow.value = Result.Loading
             }
 //            delay(1000)
-            remoteWeatherStateFlow.value = weatherRemoteDataSource.getWeather(lat, lon).value
+            remoteWeatherStateFlow.value =
+                weatherRemoteDataSource.getWeather(lat, lon, appPreference.getTempScale()).value
             remoteWeatherStateFlow.value.getOrNull()?.let {
                 weatherLocalDataSource.saveWeather(it)
             }
             Timber.d("remoteResult: ${remoteWeatherStateFlow.value}")
         }
+    }
+
+    override suspend fun cleanCache() {
+        weatherLocalDataSource.cleanCache()
     }
 }
 

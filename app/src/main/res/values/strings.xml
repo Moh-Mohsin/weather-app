@@ -18,4 +18,21 @@
     <string name="favorite_cities_label">Favorite Cities</string>
     <string name="weather_label">Weather</string>
     <string name="search_label">Search Cities</string>
+    <!-- Preference Titles -->
+    <string name="options_header">Options</string>
+    <string name="notifications_header">Notifications</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="temp_scale_title">Temperature Scale</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="daily_weather_notification_title">Daily Weather</string>
+    <string name="daily_weather_summary_on">Get a weather notification everyday at 6:00 AM</string>
+    <string name="daily_weather_summary_off">Get a weather notification everyday at 6:00 AM</string>
+    <string name="settings_label">Settings</string>
+
+    <string name="temp_scale_key" translatable="false">temp_scale</string>
+    <string name="daily_weather_notification_key" translatable="false">daily_weather_notification</string>
 </resources>

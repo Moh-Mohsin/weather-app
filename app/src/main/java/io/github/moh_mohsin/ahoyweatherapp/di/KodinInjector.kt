@@ -20,16 +20,23 @@ import org.kodein.di.generic.singleton
 import kotlin.coroutines.CoroutineContext
 
 
-val appDependencies = Kodein.Module("app") {
+val weatherFeatureDependencies = Kodein.Module("app") {
 
     bind<CoroutineContext>() with provider { Dispatchers.Default }
 
     bind<OpenWeatherApi>() with singleton { OpenWeatherService().getService() }
     bind<WeatherLocalDataSource>() with singleton { WeatherLocalDataSourceImpl(instance()) }
     bind<WeatherRemoteDataSource>() with singleton { WeatherRemoteDataSourceImpl(instance()) }
-    bind<WeatherRepository>() with singleton { WeatherRepositoryImpl(instance(), instance()) }
+    bind<WeatherRepository>() with singleton {
+        WeatherRepositoryImpl(
+            instance(),
+            instance(),
+            instance()
+        )
+    }
 
     bind<GetWeatherUseCase>() with provider { GetWeatherUseCase(instance()) }
+    bind<CleanWeatherCacheUseCase>() with provider { CleanWeatherCacheUseCase(instance()) }
 }
 val cityFeatureDependencies = Kodein.Module("city"){
     bind<CityRepository>() with singleton { CityRepositoryImpl(instance()) }

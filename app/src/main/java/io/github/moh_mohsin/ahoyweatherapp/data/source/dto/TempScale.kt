@@ -1,6 +1,6 @@
 package io.github.moh_mohsin.ahoyweatherapp.data.source.dto
 
-enum class TempMetric {
+enum class TempScale {
     METRIC,
     IMPERIAL,
 }

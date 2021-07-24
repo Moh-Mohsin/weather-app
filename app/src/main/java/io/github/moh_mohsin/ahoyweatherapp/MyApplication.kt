@@ -3,8 +3,9 @@ package io.github.moh_mohsin.ahoyweatherapp
 import android.app.Application
 import androidx.room.Room
 import io.github.moh_mohsin.ahoyweatherapp.data.source.local.AppDatabase
-import io.github.moh_mohsin.ahoyweatherapp.di.appDependencies
+import io.github.moh_mohsin.ahoyweatherapp.data.source.local.AppPreference
 import io.github.moh_mohsin.ahoyweatherapp.di.cityFeatureDependencies
+import io.github.moh_mohsin.ahoyweatherapp.di.weatherFeatureDependencies
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.bind
@@ -24,7 +25,9 @@ class MyApplication : Application(), KodeinAware {
 //                .createFromAsset("database/ahoy-weather.db")
                 .build()
         }
-        import(appDependencies)
+        bind<AppPreference>() with singleton { AppPreference(applicationContext) }
+
+        import(weatherFeatureDependencies)
         import(cityFeatureDependencies)
     }
 

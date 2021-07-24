@@ -3,7 +3,6 @@ package io.github.moh_mohsin.ahoyweatherapp.data.source.local
 import androidx.room.*
 import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.WeatherInfoDto
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
 
 @Dao
 interface WeatherInfoDao {
@@ -19,4 +18,7 @@ interface WeatherInfoDao {
 
     @Delete
     suspend fun delete(weatherInfoDto: WeatherInfoDto)
+
+    @Query("Delete FROM weatherinfodto")
+    suspend fun deleteAll()
 }

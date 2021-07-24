@@ -35,5 +35,9 @@
     <action
         android:id="@+id/action_global_cityWeatherFragment"
         app:destination="@id/cityWeatherFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="io.github.moh_mohsin.ahoyweatherapp.ui.settings.SettingsFragment"
+        android:label="@string/settings_label" />
 
 </navigation>
