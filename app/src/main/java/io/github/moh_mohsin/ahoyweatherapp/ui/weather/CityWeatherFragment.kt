@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
 import io.github.moh_mohsin.ahoyweatherapp.MainActivity
+import io.github.moh_mohsin.ahoyweatherapp.data.model.WeatherInfo
 
 class CityWeatherFragment : WeatherFragment() {
     private val args by navArgs<CityWeatherFragmentArgs>()
@@ -18,4 +19,5 @@ class CityWeatherFragment : WeatherFragment() {
         subscribe(args.city.lat, args.city.lng)
     }
 
+    override fun getTitle(weatherInfo: WeatherInfo) = args.city.name
 }

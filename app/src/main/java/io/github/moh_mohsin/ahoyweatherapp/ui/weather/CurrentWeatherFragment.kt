@@ -15,6 +15,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import io.github.moh_mohsin.ahoyweatherapp.R
+import io.github.moh_mohsin.ahoyweatherapp.data.model.WeatherInfo
 import io.github.moh_mohsin.ahoyweatherapp.util.toast
 
 
@@ -42,6 +43,8 @@ class CurrentWeatherFragment : WeatherFragment() {
     override fun retry() {
         getWeatherForCurrentLocation()
     }
+
+    override fun getTitle(weatherInfo: WeatherInfo) = weatherInfo.timezone
 
     @SuppressLint("MissingPermission")
     private fun getWeatherForCurrentLocation() {

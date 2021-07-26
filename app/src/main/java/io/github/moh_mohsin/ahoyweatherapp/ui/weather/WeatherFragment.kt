@@ -51,6 +51,8 @@ abstract class WeatherFragment : Fragment(R.layout.weather_fragment) {
 
     abstract fun retry()
 
+    abstract fun getTitle(weatherInfo: WeatherInfo): String
+
     fun subscribe(lat: Double, lon: Double) {
         viewModel.getWeather(lat, lon).observe(viewLifecycleOwner) { result ->
             when (result) {
@@ -92,7 +94,7 @@ abstract class WeatherFragment : Fragment(R.layout.weather_fragment) {
         val todayWeather = weatherInfo.daily.firstOrNull { it.dt.getDateDiff(Date()) == 0L }
         Timber.d("todayWeather: $todayWeather")
 
-        (requireActivity() as MainActivity).supportActionBar?.title = weatherInfo.timezone
+        (requireActivity() as MainActivity).supportActionBar?.title = getTitle(weatherInfo)
         todayWeather?.let {
             binding.temp.text = "${it.temp.day}°"
             binding.minMaxTemp.text = "${it.temp.max}°  /  ${it.temp.min}°"
