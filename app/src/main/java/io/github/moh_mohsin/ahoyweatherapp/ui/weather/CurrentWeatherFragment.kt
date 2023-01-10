@@ -52,13 +52,14 @@ class CurrentWeatherFragment : WeatherFragment() {
         val fusedLocationClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        var flags = PendingIntent.FLAG_ONE_SHOT
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            flags = flags or PendingIntent.FLAG_IMMUTABLE
+        val flag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PendingIntent.FLAG_IMMUTABLE
+        } else {
+            PendingIntent.FLAG_ONE_SHOT
         }
         val pendingIntent = PendingIntent.getActivities(
             requireContext(), 0, arrayOf(Intent()),
-            flags
+            flag
         )
 
         fusedLocationClient.requestLocationUpdates(LocationRequest.create(), pendingIntent)

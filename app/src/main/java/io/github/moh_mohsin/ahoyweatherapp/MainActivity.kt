@@ -8,16 +8,19 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
-import kotlinx.android.synthetic.main.activity_main.*
+import io.github.moh_mohsin.ahoyweatherapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private val navController by lazy { (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController }
     private val appBarConfiguration by lazy { buildAppBarConfiguration() }
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController, appBarConfiguration)
         setUpNavigation()
     }
@@ -26,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
 
         NavigationUI.setupWithNavController(
-            bottom_navigation,
+            binding.bottomNavigation,
             navHostFragment!!.navController
         )
         navController.addOnDestinationChangedListener { _, destination, _ ->
@@ -46,11 +49,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun hideNav() {
-        bottom_navigation.visibility = View.GONE
+        binding.bottomNavigation.visibility = View.GONE
     }
 
     private fun showNav() {
-        bottom_navigation.visibility = View.VISIBLE
+        binding.bottomNavigation.visibility = View.VISIBLE
     }
 
     private fun buildAppBarConfiguration(): AppBarConfiguration {
