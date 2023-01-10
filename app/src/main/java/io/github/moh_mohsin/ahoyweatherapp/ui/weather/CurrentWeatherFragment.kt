@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -51,10 +52,15 @@ class CurrentWeatherFragment : WeatherFragment() {
         val fusedLocationClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
 
+        var flags = PendingIntent.FLAG_ONE_SHOT
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            flags = flags or PendingIntent.FLAG_IMMUTABLE
+        }
         val pendingIntent = PendingIntent.getActivities(
             requireContext(), 0, arrayOf(Intent()),
-            PendingIntent.FLAG_ONE_SHOT
+            flags
         )
+
         fusedLocationClient.requestLocationUpdates(LocationRequest.create(), pendingIntent)
 
         fusedLocationClient.lastLocation
