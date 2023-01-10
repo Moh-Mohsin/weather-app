@@ -58,7 +58,8 @@
                 android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/weather_desc"
                 app:layout_constraintStart_toEndOf="@+id/weather_desc"
-                app:layout_constraintTop_toTopOf="@+id/weather_desc" />
+                app:layout_constraintTop_toTopOf="@+id/weather_desc"
+                android:contentDescription="Weather Icon" />
 
             <View
                 android:id="@+id/divider"

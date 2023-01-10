@@ -5,13 +5,13 @@ import androidx.preference.PreferenceManager
 import io.github.moh_mohsin.ahoyweatherapp.R
 import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.TempScale
 
-class AppPreference(private val context: Context) {
+class AppPreference(context: Context) {
 
     private val preference = PreferenceManager.getDefaultSharedPreferences(context)
 
     private val tempScaleKey = context.resources.getString(R.string.temp_scale_key)
-    private val dailyWeatherNotificationKey =
-        context.resources.getString(R.string.daily_weather_notification_key)
+//    private val dailyWeatherNotificationKey =
+//        context.resources.getString(R.string.daily_weather_notification_key)
 
     fun getTempScale(): TempScale {
         return TempScale.valueOf(

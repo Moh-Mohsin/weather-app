@@ -2,7 +2,6 @@ package io.github.moh_mohsin.ahoyweatherapp.data.source.remote.api
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
-import com.squareup.moshi.Moshi
 import io.github.moh_mohsin.ahoyweatherapp.BuildConfig
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
@@ -13,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
-class OpenWeatherService() {
+class OpenWeatherService {
 
     fun getService(baseUrl: HttpUrl = BuildConfig.OPEN_WEATHER_BASE_URL.toHttpUrl()): OpenWeatherApi =
         getRetrofit(baseUrl).create(OpenWeatherApi::class.java)

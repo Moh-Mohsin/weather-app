@@ -1,9 +1,7 @@
 package io.github.moh_mohsin.ahoyweatherapp.data.source.local
 
 import androidx.room.*
-import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.CityDto
 import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.FavoriteCityDto
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoriteDao {

@@ -16,7 +16,8 @@
         android:layout_weight="1"
         android:gravity="start|center"
         android:paddingStart="8dp"
-        tools:text="@tools:sample/date/day_of_week" />
+        tools:text="@tools:sample/date/day_of_week"
+        tools:ignore="RtlSymmetry" />
 
     <ImageView
         android:id="@+id/weather_icon"
@@ -24,7 +25,8 @@
         android:layout_height="@dimen/icon_size_big"
         android:layout_weight="1"
         tools:srcCompat="@tools:sample/avatars"
-        android:paddingBottom="8dp" />
+        android:paddingBottom="8dp"
+        android:contentDescription="Weather Icon" />
 
     <TextView
         android:id="@+id/temp"
@@ -33,5 +35,6 @@
         android:layout_weight="1"
         android:gravity="end|center"
         android:paddingEnd="8dp"
-        tools:text="31°" />
+        tools:text="31°"
+        tools:ignore="RtlSymmetry" />
 </LinearLayout>

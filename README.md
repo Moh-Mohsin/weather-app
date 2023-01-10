@@ -9,7 +9,8 @@ The app is built with MVVM. The layers from bottom to top are:
 - Repositories (Offline first)
 - Use Cases 
 - View Models
-- Fragments (The App uses the Single Activity Architecture) 
+- Fragments (Single Activity Architecture) 
+
 ### Tech
 - Kotlin
 - Coroutines & Flow

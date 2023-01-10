@@ -20,7 +20,8 @@
         android:layout_height="@dimen/icon_size"
         android:layout_gravity="center"
         tools:srcCompat="@tools:sample/avatars"
-        android:paddingBottom="8dp" />
+        android:paddingBottom="8dp"
+        android:contentDescription="Weather Icon" />
 
     <TextView
         android:id="@+id/temp"
