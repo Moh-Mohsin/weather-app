@@ -1,4 +1,4 @@
-# AHOY Weather App
+# Weather App
 A weather app that displays Weather for the current location (day and hourly) and the weather for the coming days.
 Weather for a particular city can also be displayed. Cities are searchable and can be added to favorites for faster access.
 
