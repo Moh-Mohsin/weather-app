@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AHOY Weather App</string>
+    <string name="app_name">Weather App</string>
     <string name="favorite">Favorite</string>
     <string name="weather">Weather</string>
     <string name="current">Current</string>

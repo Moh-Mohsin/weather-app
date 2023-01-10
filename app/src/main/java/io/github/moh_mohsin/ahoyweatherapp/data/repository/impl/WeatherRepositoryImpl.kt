@@ -37,6 +37,7 @@ class WeatherRepositoryImpl(
                     remoteWeatherStateFlow.value = Result.Loading
                 }
             }
+            else -> {}
         }
 
         val res = weatherLocalDataSource.getWeather(lat, lon)
