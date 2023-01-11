@@ -9,8 +9,9 @@ import io.github.moh_mohsin.ahoyweatherapp.data.toCity
 import io.github.moh_mohsin.ahoyweatherapp.data.toCityDto
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class CityRepositoryImpl(private val db: AppDatabase) : CityRepository {
+class CityRepositoryImpl @Inject constructor(private val db: AppDatabase) : CityRepository {
     override suspend fun insertAll(cities: List<City>): Result<Unit> {
         db.cityDao().insertAll(*cities.map { it.toCityDto() }.toTypedArray())
         return Result.Success(Unit)

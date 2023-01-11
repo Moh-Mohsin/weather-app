@@ -15,13 +15,13 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import kotlin.coroutines.CoroutineContext
+import javax.inject.Inject
 
-class WeatherRepositoryImpl(
+class WeatherRepositoryImpl @Inject constructor(
     private val weatherLocalDataSource: WeatherLocalDataSource,
     private val weatherRemoteDataSource: WeatherRemoteDataSource,
     private val appPreference: AppPreference,
-    private val coroutineContext: CoroutineContext = Dispatchers.IO
+//    private val coroutineContext: CoroutineContext = Dispatchers.IO
 ) : WeatherRepository {
 
     private val remoteWeatherStateFlow = MutableStateFlow<Result<WeatherInfoDto>>(Result.Loading)
@@ -69,6 +69,7 @@ class WeatherRepositoryImpl(
     }
 
     private fun refreshWeather(lat: Double, lon: Double) {
+        val coroutineContext = Dispatchers.IO
         CoroutineScope(coroutineContext).launch {
             if (remoteWeatherStateFlow.value is Result.Error) {
                 remoteWeatherStateFlow.value = Result.Loading

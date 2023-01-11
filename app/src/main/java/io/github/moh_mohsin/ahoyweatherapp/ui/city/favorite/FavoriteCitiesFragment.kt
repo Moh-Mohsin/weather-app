@@ -8,12 +8,14 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.moh_mohsin.ahoyweatherapp.R
 import io.github.moh_mohsin.ahoyweatherapp.databinding.FavoriteCitiesFragmentBinding
 import io.github.moh_mohsin.ahoyweatherapp.ui.city.adapter.CityAdapter
 import io.github.moh_mohsin.ahoyweatherapp.util.showOrHide
 import io.github.moh_mohsin.ahoyweatherapp.util.viewBinding
 
+@AndroidEntryPoint
 class FavoriteCitiesFragment : Fragment(R.layout.favorite_cities_fragment) {
 
     private val binding by viewBinding(FavoriteCitiesFragmentBinding::bind)

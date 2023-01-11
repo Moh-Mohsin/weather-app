@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.moh_mohsin.ahoyweatherapp.MainActivity
 import io.github.moh_mohsin.ahoyweatherapp.R
 import io.github.moh_mohsin.ahoyweatherapp.data.Result
@@ -26,6 +27,7 @@ import timber.log.Timber
 import java.util.*
 
 
+@AndroidEntryPoint
 abstract class WeatherFragment : Fragment(R.layout.weather_fragment) {
 
     private val binding by viewBinding(WeatherFragmentBinding::bind)

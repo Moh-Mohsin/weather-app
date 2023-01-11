@@ -1,7 +1,7 @@
 package io.github.moh_mohsin.ahoyweatherapp.ui.city.search
 
-import android.app.Application
 import androidx.lifecycle.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.moh_mohsin.ahoyweatherapp.data.Message
 import io.github.moh_mohsin.ahoyweatherapp.data.model.City
 import io.github.moh_mohsin.ahoyweatherapp.domain.AddCityToFavoritesUseCase
@@ -9,19 +9,17 @@ import io.github.moh_mohsin.ahoyweatherapp.domain.GetFavoriteCitiesUseCase
 import io.github.moh_mohsin.ahoyweatherapp.domain.RemoveCityFromFavoritesUseCase
 import io.github.moh_mohsin.ahoyweatherapp.domain.SearchCitiesUseCase
 import kotlinx.coroutines.launch
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.kodein
-import org.kodein.di.generic.instance
 import timber.log.Timber
+import javax.inject.Inject
 
-class CitySearchViewModel(app: Application) : AndroidViewModel(app), KodeinAware {
-
-    override val kodein by kodein(app)
-
-    private val searchCitiesUseCase by instance<SearchCitiesUseCase>()
-    private val getFavoriteCitiesUseCase by instance<GetFavoriteCitiesUseCase>()
-    private val addCityToFavoritesUseCase by instance<AddCityToFavoritesUseCase>()
-    private val removeCityFromFavoritesUseCase by instance<RemoveCityFromFavoritesUseCase>()
+@HiltViewModel
+class CitySearchViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
+    private val searchCitiesUseCase: SearchCitiesUseCase,
+    getFavoriteCitiesUseCase: GetFavoriteCitiesUseCase,
+    private val addCityToFavoritesUseCase: AddCityToFavoritesUseCase,
+    private val removeCityFromFavoritesUseCase: RemoveCityFromFavoritesUseCase,
+) : ViewModel() {
 
     var query: String = ""
 

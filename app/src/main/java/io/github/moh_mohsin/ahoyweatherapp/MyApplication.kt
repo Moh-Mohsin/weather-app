@@ -1,42 +1,24 @@
 package io.github.moh_mohsin.ahoyweatherapp
 
 import android.app.Application
-import androidx.room.Room
+import androidx.hilt.work.HiltWorkerFactory
+import androidx.work.Configuration
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
-import io.github.moh_mohsin.ahoyweatherapp.data.source.local.AppDatabase
-import io.github.moh_mohsin.ahoyweatherapp.data.source.local.AppPreference
+import dagger.hilt.android.HiltAndroidApp
 import io.github.moh_mohsin.ahoyweatherapp.data.worker.DailyWeatherNotificationWorker
-import io.github.moh_mohsin.ahoyweatherapp.di.cityFeatureDependencies
-import io.github.moh_mohsin.ahoyweatherapp.di.weatherFeatureDependencies
 import org.joda.time.DateTime
 import org.joda.time.Duration
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.singleton
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 
-class MyApplication : Application(), KodeinAware {
+@HiltAndroidApp
+class MyApplication : Application(), Configuration.Provider {
 
-    override val kodein by Kodein.lazy {
-        bind<AppDatabase>() with singleton {
-            Room.databaseBuilder(
-                applicationContext,
-                AppDatabase::class.java,
-                "ahoy-weather",
-            )
-                .createFromAsset("database/ahoy-weather.db")
-                .build()
-        }
-        bind<AppPreference>() with singleton { AppPreference(applicationContext) }
-
-        import(weatherFeatureDependencies)
-        import(cityFeatureDependencies)
-    }
+    @Inject lateinit var workerFactory: HiltWorkerFactory
 
     override fun onCreate() {
         super.onCreate()
@@ -81,5 +63,9 @@ class MyApplication : Application(), KodeinAware {
 //                .build()
 //        WorkManager.getInstance(applicationContext)
 //            .enqueue(oneTimeRequest)
+    }
+
+    override fun getWorkManagerConfiguration(): Configuration {
+        return Configuration.Builder().setWorkerFactory(workerFactory).build()
     }
 }

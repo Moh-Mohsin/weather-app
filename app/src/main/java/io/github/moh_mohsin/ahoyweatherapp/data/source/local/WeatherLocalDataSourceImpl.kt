@@ -5,8 +5,9 @@ import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.WeatherInfoDto
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
+import javax.inject.Inject
 
-class WeatherLocalDataSourceImpl(private val db: AppDatabase) : WeatherLocalDataSource {
+class WeatherLocalDataSourceImpl @Inject constructor(private val db: AppDatabase) : WeatherLocalDataSource {
     override fun getWeather(lat: Double, lon: Double): Flow<WeatherInfoDto?> {
         return db.weatherInfoDao().findByLatLon(lat, lon).map { res ->
 //            val res = it?.toSuccess() ?: Result.Loading

@@ -2,10 +2,12 @@ package io.github.moh_mohsin.ahoyweatherapp.data.source.local
 
 import android.content.Context
 import androidx.preference.PreferenceManager
+import dagger.hilt.android.qualifiers.ApplicationContext
 import io.github.moh_mohsin.ahoyweatherapp.R
 import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.TempScale
+import javax.inject.Inject
 
-class AppPreference(context: Context) {
+class AppPreference @Inject constructor(@ApplicationContext context: Context) {
 
     private val preference = PreferenceManager.getDefaultSharedPreferences(context)
 

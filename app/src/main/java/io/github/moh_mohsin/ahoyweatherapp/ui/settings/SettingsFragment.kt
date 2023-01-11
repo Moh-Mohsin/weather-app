@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.moh_mohsin.ahoyweatherapp.R
 
+@AndroidEntryPoint
 class SettingsFragment : PreferenceFragmentCompat() {
 
     private val viewModel by viewModels<SettingsViewModel>()

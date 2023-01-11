@@ -1,26 +1,25 @@
 package io.github.moh_mohsin.ahoyweatherapp.ui.city.favorite
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.moh_mohsin.ahoyweatherapp.data.model.City
 import io.github.moh_mohsin.ahoyweatherapp.domain.GetFavoriteCitiesUseCase
 import io.github.moh_mohsin.ahoyweatherapp.domain.RemoveCityFromFavoritesUseCase
 import io.github.moh_mohsin.ahoyweatherapp.ui.city.search.CityWithFavorite
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.kodein
-import org.kodein.di.generic.instance
+import javax.inject.Inject
 
-class FavoriteCitiesViewModel(app: Application) : AndroidViewModel(app), KodeinAware {
+@HiltViewModel
+class FavoriteCitiesViewModel @Inject constructor(
+//    savedStateHandle: SavedStateHandle,
+    getFavoriteCitiesUseCase: GetFavoriteCitiesUseCase,
+    private val removeCityFromFavoritesUseCase: RemoveCityFromFavoritesUseCase,
+) : ViewModel(){
 
-    override val kodein by kodein(app)
-
-    private val getFavoriteCitiesUseCase by instance<GetFavoriteCitiesUseCase>()
-    private val removeCityFromFavoritesUseCase by instance<RemoveCityFromFavoritesUseCase>()
 
     val favoriteCities: LiveData<List<CityWithFavorite>> =
         getFavoriteCitiesUseCase().map { it.map { city -> CityWithFavorite(city, true) } }

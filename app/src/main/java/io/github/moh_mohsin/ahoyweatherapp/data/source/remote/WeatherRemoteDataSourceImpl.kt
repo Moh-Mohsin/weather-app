@@ -10,8 +10,9 @@ import io.github.moh_mohsin.ahoyweatherapp.data.source.remote.api.OpenWeatherApi
 import io.github.moh_mohsin.ahoyweatherapp.util.handle
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class WeatherRemoteDataSourceImpl(private val openWeatherApi: OpenWeatherApi) :
+class WeatherRemoteDataSourceImpl @Inject constructor(private val openWeatherApi: OpenWeatherApi) :
     WeatherRemoteDataSource {
     override suspend fun getWeather(
         lat: Double,

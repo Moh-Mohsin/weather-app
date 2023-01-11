@@ -12,3 +12,4 @@ interface WeatherRepository {
 
     suspend fun cleanCache()
 }
+

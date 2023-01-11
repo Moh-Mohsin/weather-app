@@ -9,10 +9,12 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.google.android.gms.location.LocationServices
-import io.github.moh_mohsin.ahoyweatherapp.MyApplication
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import io.github.moh_mohsin.ahoyweatherapp.R
 import io.github.moh_mohsin.ahoyweatherapp.data.getOrNull
 import io.github.moh_mohsin.ahoyweatherapp.data.model.WeatherInfo
@@ -21,11 +23,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.kodein.di.KodeinAware
-import org.kodein.di.generic.instance
 import timber.log.Timber
 
-class DailyWeatherNotificationWorker(appContext: Context, workerParams: WorkerParameters) :
+@HiltWorker
+class DailyWeatherNotificationWorker @AssistedInject constructor(
+    @Assisted appContext: Context,
+    @Assisted workerParams: WorkerParameters,
+    private val weatherRepository: WeatherRepository,
+) :
     CoroutineWorker(appContext, workerParams) {
     init {
         createNotificationChannel()
@@ -33,9 +38,6 @@ class DailyWeatherNotificationWorker(appContext: Context, workerParams: WorkerPa
 
     override suspend fun doWork(): Result {
         return withContext(Dispatchers.IO) {
-
-            (applicationContext as MyApplication)
-            val weatherRepository by (applicationContext as KodeinAware).kodein.instance<WeatherRepository>()
             Timber.d("################ doWork #############")
             val permission = ContextCompat.checkSelfPermission(
                 applicationContext,

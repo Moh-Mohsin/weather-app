@@ -4,9 +4,10 @@ import io.github.moh_mohsin.ahoyweatherapp.data.Result
 import io.github.moh_mohsin.ahoyweatherapp.data.model.WeatherInfo
 import io.github.moh_mohsin.ahoyweatherapp.data.repository.WeatherRepository
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 import kotlin.math.round
 
-class GetWeatherUseCase(private val weatherRepository: WeatherRepository) {
+class GetWeatherUseCase @Inject constructor(private val weatherRepository: WeatherRepository) {
 
     operator fun invoke(lat: Double, lon: Double): Flow<Result<WeatherInfo>> {
         // OpenWeather API ignores decimal points past 4 digits in lat/lon,
