@@ -11,26 +11,24 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import io.github.moh_mohsin.ahoyweatherapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private val navController by lazy { (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController }
+    private val navHostFragment by lazy { supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment }
+    private val navController by lazy { navHostFragment.navController }
     private val appBarConfiguration by lazy { buildAppBarConfiguration() }
-    private lateinit var binding: ActivityMainBinding
+    private val binding by lazy {ActivityMainBinding.inflate(layoutInflater)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController, appBarConfiguration)
         setUpNavigation()
     }
-    private fun setUpNavigation() {
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
 
+    private fun setUpNavigation() {
         NavigationUI.setupWithNavController(
             binding.bottomNavigation,
-            navHostFragment!!.navController
+            navHostFragment.navController
         )
         navController.addOnDestinationChangedListener { _, destination, _ ->
             handleDestinationChange(destination)
@@ -38,22 +36,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleDestinationChange(destination: NavDestination) {
-        when (destination.id) {
-            in appBarConfiguration.topLevelDestinations -> {
-                showNav()
-            }
-            else -> {
-                hideNav()
-            }
+        binding.bottomNavigation.visibility  = when (destination.id) {
+            in appBarConfiguration.topLevelDestinations -> View.VISIBLE
+            else -> View.GONE
         }
-    }
-
-    private fun hideNav() {
-        binding.bottomNavigation.visibility = View.GONE
-    }
-
-    private fun showNav() {
-        binding.bottomNavigation.visibility = View.VISIBLE
     }
 
     private fun buildAppBarConfiguration(): AppBarConfiguration {
@@ -64,5 +50,4 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
-
 }
