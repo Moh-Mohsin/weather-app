@@ -14,7 +14,7 @@ The app is built with MVVM. The layers from bottom to top are:
 ### Tech
 - Kotlin
 - Coroutines & Flow
-- Kodein (for DI)
+- Hilt
 - Retrofit
 - Room
 - Navigation Component
