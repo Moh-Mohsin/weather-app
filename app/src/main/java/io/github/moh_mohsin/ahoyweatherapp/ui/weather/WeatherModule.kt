@@ -17,34 +17,41 @@ import io.github.moh_mohsin.ahoyweatherapp.data.source.local.WeatherLocalDataSou
 import io.github.moh_mohsin.ahoyweatherapp.data.source.remote.WeatherRemoteDataSourceImpl
 import io.github.moh_mohsin.ahoyweatherapp.data.source.remote.api.OpenWeatherApi
 import io.github.moh_mohsin.ahoyweatherapp.data.source.remote.api.OpenWeatherService
+import timber.log.Timber
+import javax.inject.Singleton
 
 
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class WeatherModule {
+    @Singleton
     @Binds
     abstract fun bindWeatherRepository(
         weatherRepositoryImpl: WeatherRepositoryImpl
     ): WeatherRepository
 
+    @Singleton
     @Binds
     abstract fun bindWeatherLocalDataSource(
         weatherLocalDataSourceImpl: WeatherLocalDataSourceImpl
     ): WeatherLocalDataSource
 
+    @Singleton
     @Binds
     abstract fun bindWeatherRemoteDataSource(
         weatherRemoteDataSourceImpl: WeatherRemoteDataSourceImpl
     ): WeatherRemoteDataSource
 
 }
+
 @Module
 @InstallIn(SingletonComponent::class)
 object WeatherProvidersModule {
 
-//    @Singleton
+    @Singleton
     @Provides
     fun providesAppDatabase(@ApplicationContext applicationContext: Context): AppDatabase {
+        Timber.d("providesAppDatabase");
         return Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java,
@@ -52,6 +59,7 @@ object WeatherProvidersModule {
         ).createFromAsset("database/weather-app.db").build()
     }
 
+    @Singleton
     @Provides
     fun providesOpenWeatherApi(): OpenWeatherApi {
         return OpenWeatherService().getService()
