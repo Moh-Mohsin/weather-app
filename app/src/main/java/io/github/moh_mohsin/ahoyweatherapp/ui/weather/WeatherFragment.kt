@@ -6,8 +6,11 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +41,6 @@ abstract class WeatherFragment : Fragment(R.layout.weather_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
 
         hourlyWeatherAdapter = HourlyWeatherAdapter()
         dailyWeatherAdapter = DailyWeatherAdapter()
@@ -49,6 +51,23 @@ abstract class WeatherFragment : Fragment(R.layout.weather_fragment) {
         binding.retry.setOnClickListener {
             retry()
         }
+
+        (requireActivity() as MenuHost).addMenuProvider( object : MenuProvider{
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.main_options, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.action_settings -> {
+                        findNavController().navigate(R.id.settingsFragment)
+                        true
+                    }
+                    else -> false
+                }
+            }
+
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     abstract fun retry()
@@ -123,20 +142,5 @@ abstract class WeatherFragment : Fragment(R.layout.weather_fragment) {
         Timber.d("current: ${weatherInfo.current}")
         hourlyWeatherAdapter.submitList(hourly)
         dailyWeatherAdapter.submitList(daily)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_options, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_settings -> {
-                findNavController().navigate(R.id.settingsFragment)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 }

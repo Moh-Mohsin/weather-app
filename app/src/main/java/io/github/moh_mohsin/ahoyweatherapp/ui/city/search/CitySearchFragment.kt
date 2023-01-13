@@ -3,10 +3,14 @@ package io.github.moh_mohsin.ahoyweatherapp.ui.city.search
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.moh_mohsin.ahoyweatherapp.R
@@ -26,7 +30,6 @@ class CitySearchFragment : Fragment(R.layout.city_search_fragment), SearchView.O
     private var savedSearch: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setHasOptionsMenu(true)
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = CityAdapter(onClick = {
@@ -71,23 +74,28 @@ class CitySearchFragment : Fragment(R.layout.city_search_fragment), SearchView.O
                 }
             }
         }
-    }
 
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.city_search_menu, menu)
-        val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as SearchView
-        searchView.queryHint = getString(R.string.search)
+        (requireActivity() as MenuHost).addMenuProvider( object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.city_search_menu, menu)
+                val searchItem = menu.findItem(R.id.action_search)
+                val searchView = searchItem.actionView as SearchView
+                searchView.queryHint = getString(R.string.search)
 
-        savedSearch?.let { query ->
-            searchItem.expandActionView()
-            searchView.setQuery(query, true)
-            searchView.clearFocus()
-        }
-        searchView.setOnQueryTextListener(this)
+                savedSearch?.let { query ->
+                    searchItem.expandActionView()
+                    searchView.setQuery(query, true)
+                    searchView.clearFocus()
+                }
+                searchView.setOnQueryTextListener(this@CitySearchFragment)
+            }
 
-        super.onCreateOptionsMenu(menu, inflater)
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return false
+            }
+
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
 
