@@ -43,4 +43,5 @@
     <string name="wind_speed_value">"Wind Speed: %.0f %s"</string>
     <string name="meter_second">meter/second</string>
     <string name="miles_hour">miles/hour</string>
+    <string name="location_permission_rationale">To get Local weather, allow location permission in the Settings</string>
 </resources>

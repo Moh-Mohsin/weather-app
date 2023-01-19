@@ -33,7 +33,7 @@ import java.util.*
 @AndroidEntryPoint
 abstract class WeatherFragment : Fragment(R.layout.weather_fragment) {
 
-    private val binding by viewBinding(WeatherFragmentBinding::bind)
+    val binding by viewBinding(WeatherFragmentBinding::bind)
     private val viewModel by viewModels<WeatherViewModel>()
 
     private lateinit var hourlyWeatherAdapter: HourlyWeatherAdapter

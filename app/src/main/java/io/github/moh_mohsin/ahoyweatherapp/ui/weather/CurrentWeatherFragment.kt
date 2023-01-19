@@ -17,6 +17,7 @@ import com.google.android.gms.location.LocationServices
 import com.permissionx.guolindev.PermissionX
 import io.github.moh_mohsin.ahoyweatherapp.R
 import io.github.moh_mohsin.ahoyweatherapp.data.model.WeatherInfo
+import io.github.moh_mohsin.ahoyweatherapp.util.showOrHide
 import io.github.moh_mohsin.ahoyweatherapp.util.toast
 
 
@@ -33,15 +34,32 @@ class CurrentWeatherFragment : WeatherFragment() {
             getWeatherForCurrentLocation()
         } else {
             // use post to solve and issue with the permission library crashing because of FragmentManager
-            Handler(Looper.myLooper()!!).post {
-                PermissionX.init(requireActivity())
-                    .permissions(Manifest.permission.ACCESS_COARSE_LOCATION)
-                    .request { allGranted, _, _ ->
-                        if (allGranted){
-                            getWeatherForCurrentLocation()
-                        }
+            requestLocationAccess()
+        }
+        binding.locationAccessButton.setOnClickListener {
+            requestLocationAccess()
+        }
+    }
+
+    private fun requestLocationAccess() {
+        Handler(Looper.myLooper()!!).post {
+            PermissionX.init(requireActivity())
+                .permissions(Manifest.permission.ACCESS_COARSE_LOCATION)
+                .onForwardToSettings { scope, deniedList ->
+                    scope.showForwardToSettingsDialog(
+                        deniedList,
+                        getString(R.string.location_permission_rationale),
+                        getString(android.R.string.ok),
+                        getString(android.R.string.cancel),
+                    )
+                }
+                .request { allGranted, _, _ ->
+                    binding.weatherContent.showOrHide(allGranted)
+                    binding.locationAccessButton.showOrHide(!allGranted)
+                    if (allGranted) {
+                        getWeatherForCurrentLocation()
                     }
-            }
+                }
         }
     }
 
