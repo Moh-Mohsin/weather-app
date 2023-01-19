@@ -140,7 +140,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // Permission Helper
-    implementation 'com.github.QuickPermissions:QuickPermissions-Kotlin:0.4.0'
+    implementation 'com.guolindev.permissionx:permissionx:1.7.1'
 
     // WorkManager Kotlin + coroutines
     implementation("androidx.work:work-runtime-ktx:2.7.1")

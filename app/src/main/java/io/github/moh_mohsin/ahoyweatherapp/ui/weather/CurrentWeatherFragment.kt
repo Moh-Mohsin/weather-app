@@ -14,7 +14,7 @@ import android.view.View
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
-import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
+import com.permissionx.guolindev.PermissionX
 import io.github.moh_mohsin.ahoyweatherapp.R
 import io.github.moh_mohsin.ahoyweatherapp.data.model.WeatherInfo
 import io.github.moh_mohsin.ahoyweatherapp.util.toast
@@ -34,9 +34,13 @@ class CurrentWeatherFragment : WeatherFragment() {
         } else {
             // use post to solve and issue with the permission library crashing because of FragmentManager
             Handler(Looper.myLooper()!!).post {
-                runWithPermissions(Manifest.permission.ACCESS_FINE_LOCATION) {
-                    getWeatherForCurrentLocation()
-                }
+                PermissionX.init(requireActivity())
+                    .permissions(Manifest.permission.ACCESS_COARSE_LOCATION)
+                    .request { allGranted, _, _ ->
+                        if (allGranted){
+                            getWeatherForCurrentLocation()
+                        }
+                    }
             }
         }
     }
