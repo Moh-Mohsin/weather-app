@@ -54,7 +54,7 @@ class CurrentWeatherFragment : WeatherFragment() {
                     )
                 }
                 .request { allGranted, _, _ ->
-                    binding.weatherContent.showOrHide(allGranted)
+                    binding.composeView.showOrHide(allGranted)
                     binding.locationAccessButton.showOrHide(!allGranted)
                     if (allGranted) {
                         getWeatherForCurrentLocation()
@@ -89,7 +89,7 @@ class CurrentWeatherFragment : WeatherFragment() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 location?.let {
-                    subscribe(it.latitude, it.longitude)
+                    subscribeCompose(it.latitude, it.longitude)
                 } ?: run {
                     showRetry(true)
                     toast(R.string.location_not_available)
