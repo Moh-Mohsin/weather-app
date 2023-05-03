@@ -1,6 +1,5 @@
 package io.github.moh_mohsin.ahoyweatherapp.ui.weather
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -11,12 +10,14 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,9 +28,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import coil.compose.AsyncImage
-import coil.load
+import coil.request.ImageRequest
 import dagger.hilt.android.AndroidEntryPoint
-import io.github.moh_mohsin.ahoyweatherapp.MainActivity
 import io.github.moh_mohsin.ahoyweatherapp.R
 import io.github.moh_mohsin.ahoyweatherapp.data.Result
 import io.github.moh_mohsin.ahoyweatherapp.data.model.Daily
@@ -43,7 +43,6 @@ import io.github.moh_mohsin.ahoyweatherapp.ui.LightColors
 import io.github.moh_mohsin.ahoyweatherapp.ui.weather.adapter.DailyWeatherAdapter
 import io.github.moh_mohsin.ahoyweatherapp.ui.weather.adapter.HourlyWeatherAdapter
 import io.github.moh_mohsin.ahoyweatherapp.util.*
-import timber.log.Timber
 import java.util.*
 
 
@@ -58,8 +57,6 @@ abstract class WeatherFragment : Fragment(R.layout.weather_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
 
         hourlyWeatherAdapter = HourlyWeatherAdapter()
         dailyWeatherAdapter = DailyWeatherAdapter()
@@ -115,81 +112,16 @@ abstract class WeatherFragment : Fragment(R.layout.weather_fragment) {
         }
     }
 
-    fun subscribe(lat: Double, lon: Double) {
-        viewModel.getWeather(lat, lon).observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Error -> {
-                    showLoading(false)
-                    showContent(false)
-                    showRetry(true)
-                    toast(result.exception.msg)
-                }
-                Result.Loading -> {
-                    showLoading(true)
-                    showContent(false)
-                    showRetry(false)
-                }
-                is Result.Success -> {
-                    showContent(true)
-                    showLoading(false)
-                    showRetry(false)
-                    bindViews(result.data)
-                }
-            }
-        }
-    }
-
-    private fun showContent(show: Boolean) {
-        binding.content.showOrHide(show)
-    }
-
-    private fun showLoading(show: Boolean) {
-        binding.loading.showOrHide(show)
-    }
-
     fun showRetry(show: Boolean) {
         binding.retry.showOrHide(show)
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun bindViews(weatherInfo: WeatherInfo) {
-        val todayWeather = weatherInfo.daily.firstOrNull { it.dt.getDateDiff(Date()) == 0L }
-        Timber.d("todayWeather: $todayWeather")
-
-        (requireActivity() as MainActivity).supportActionBar?.title = getTitle(weatherInfo)
-        todayWeather?.let {
-            binding.temp.text = "${it.temp.day}°"
-            binding.minMaxTemp.text = "${it.temp.max}°  /  ${it.temp.min}°"
-            it.weather.firstOrNull()?.let { weather ->
-                binding.weatherDesc.text = weather.description
-                binding.weatherIcon.load(weather.icon)
-            }
-            binding.humidity.text = getString(R.string.humidity_value, it.humidity)
-            val windSpeedStr = when (weatherInfo.tempScale) {
-                TempScale.METRIC -> getString(R.string.meter_second)
-                TempScale.IMPERIAL -> getString(R.string.miles_hour)
-            }
-            binding.windSpeed.text =
-                getString(R.string.wind_speed_value, it.windSpeed, windSpeedStr)
-
-        } ?: run {
-            Timber.d("should update cache...")
-        }
-        val hourly = weatherInfo.hourly.filter { it.dt.getDateDiff(Date()) == 0L }
-        val daily = weatherInfo.daily.drop(1) //remove first day since its the current day
-
-        Timber.d("hourly: ${hourly.size}")
-        Timber.d("daily: ${daily.size}")
-        Timber.d("current: ${weatherInfo.current}")
-        hourlyWeatherAdapter.submitList(hourly)
-        dailyWeatherAdapter.submitList(daily)
-    }
 }
 
 @Composable
 fun Weather(weatherInfo: WeatherInfo) {
 
-    MaterialTheme(colors = if(isSystemInDarkTheme()) DarkColors else LightColors) {
+    MaterialTheme(colors = if (isSystemInDarkTheme()) DarkColors else LightColors) {
         Surface {
 
             val todayWeather = weatherInfo.daily.firstOrNull { it.dt.getDateDiff(Date()) == 0L }
@@ -205,40 +137,57 @@ fun Weather(weatherInfo: WeatherInfo) {
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
                         text = "${todayWeather.temp.max}°  /  ${todayWeather.temp.min}°",
+                        style = MaterialTheme.typography.body2,
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     todayWeather.weather.firstOrNull()?.let { weather ->
                         Row(horizontalArrangement = Arrangement.Center) {
-                            Text(text = weather.description)
+                            Text(text = weather.description,
+                                style = MaterialTheme.typography.body2,)
                             AsyncImage(
                                 modifier = Modifier
-                                    .size(16.dp)
-                                    .padding(horizontal = 8.dp),
+                                    .padding(horizontal = 8.dp)
+                                    .size(16.dp),
                                 model = weather.icon,
                                 contentDescription = "Weather Icon",
                             )
                         }
                     }
+                    Divider(
+                        modifier = Modifier.width(60.dp).padding(vertical = 8.dp)
+                    )
                     Text(
                         text = stringResource(R.string.humidity_value, todayWeather.humidity),
+                        style = MaterialTheme.typography.body2,
                     )
                     val windSpeedStr = when (weatherInfo.tempScale) {
                         TempScale.METRIC -> stringResource(R.string.meter_second)
                         TempScale.IMPERIAL -> stringResource(R.string.miles_hour)
                     }
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = stringResource(
                             R.string.wind_speed_value, todayWeather.windSpeed, windSpeedStr
                         ),
+                        style = MaterialTheme.typography.body2,
                     )
                     val hourly = weatherInfo.hourly.filter { it.dt.getDateDiff(Date()) == 0L }
-                    val daily = weatherInfo.daily.drop(1) //remove first day since its the current day
+                    val daily =
+                        weatherInfo.daily.drop(1) //remove first day since its the current day
 
-                    Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Divider()
+                    Row(
+                        modifier = Modifier
+                            .padding(vertical = 6.dp)
+                            .horizontalScroll(rememberScrollState())
+                    ) {
                         for (hourlyWeather in weatherInfo.hourly) {
                             HourlyWeatherItem(weatherDetail = hourlyWeather)
                         }
                     }
+                    Divider()
+                    Spacer(modifier = Modifier.height(6.dp))
 
                     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                         for (dailyWeather in weatherInfo.daily) {
@@ -266,18 +215,23 @@ fun HourlyWeatherItem(weatherDetail: WeatherDetail) {
         modifier = Modifier.padding(horizontal = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+//        println("weather icon: ${weatherDetail.weather.firstOrNull()?.icon}")
         Text(
-            text = weatherDetail.dt.format("hh:mm a")
+            text = weatherDetail.dt.format("hh:mm a"),
+            style = MaterialTheme.typography.body2,
         )
         AsyncImage(
             modifier = Modifier
-                .size(16.dp)
-                .padding(vertical = 8.dp),
-            model = weatherDetail.weather.firstOrNull()?.icon,
+                .padding(8.dp)
+                .size(24.dp),
+            model = ImageRequest.Builder(context = LocalContext.current)
+                .data(weatherDetail.weather.firstOrNull()?.icon)
+                .build(),
             contentDescription = "Weather Icon",
         )
         Text(
-            text = "${weatherDetail.temp}°"
+            text = "${weatherDetail.temp}°",
+            style = MaterialTheme.typography.body2,
         )
     }
 }
@@ -291,23 +245,25 @@ fun HourlyWeatherItemPreview() {
 
 @Composable
 fun DailyWeatherItem(daily: Daily) {
-    Row (
-        modifier = Modifier.padding(vertical = 8.dp),
+    Row(
+        modifier = Modifier.padding(vertical = 8.dp, horizontal = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
-    ){
+    ) {
         Text(
-            text = daily.dt.format("hh:mm a")
+            text = daily.dt.format("d, MMM"),
+            style = MaterialTheme.typography.body1,
         )
         AsyncImage(
             modifier = Modifier
-                .size(16.dp)
                 .padding(vertical = 8.dp)
+                .size(32.dp)
                 .weight(1.0f),
             model = daily.weather.firstOrNull()?.icon,
             contentDescription = "Weather Icon",
         )
         Text(
-            text = "${daily.temp.max}° / ${daily.temp.min}°"
+            text = "${daily.temp.max}° / ${daily.temp.min}°",
+            style = MaterialTheme.typography.body1,
         )
     }
 }
