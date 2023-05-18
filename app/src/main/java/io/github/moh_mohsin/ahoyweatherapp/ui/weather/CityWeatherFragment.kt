@@ -12,11 +12,11 @@ class CityWeatherFragment : WeatherFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as MainActivity).supportActionBar?.title = args.city.name
-        subscribe(args.city.lat, args.city.lng)
+        subscribeCompose(args.city.lat, args.city.lng)
     }
 
     override fun retry() {
-        subscribe(args.city.lat, args.city.lng)
+        subscribeCompose(args.city.lat, args.city.lng)
     }
 
     override fun getTitle(weatherInfo: WeatherInfo) = args.city.name
