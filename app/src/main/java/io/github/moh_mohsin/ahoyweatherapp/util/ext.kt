@@ -1,5 +1,7 @@
 package io.github.moh_mohsin.ahoyweatherapp.util
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import io.github.moh_mohsin.ahoyweatherapp.data.*
 import kotlinx.coroutines.Dispatchers
@@ -57,4 +59,6 @@ fun <T> Response<T>.getExceptionFromErrorCode(): AppException {
 
 data class MyErrorMessage(val cod: Int, val message: String)
 
+
+fun <T> MutableLiveData<T>.toLiveData() = this as LiveData<T>
 

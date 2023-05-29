@@ -25,6 +25,8 @@
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
     <string name="temp_scale_title">Temperature Scale</string>
+    <string name="temp_celsius">Celsius</string>
+    <string name="temp_fahrenheit">Fahrenheit</string>
 
     <!-- Sync Preferences -->
     <string name="sync_title">Sync email periodically</string>

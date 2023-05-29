@@ -2,11 +2,11 @@ package io.github.moh_mohsin.ahoyweatherapp.data.repository.impl
 
 import io.github.moh_mohsin.ahoyweatherapp.data.*
 import io.github.moh_mohsin.ahoyweatherapp.data.model.WeatherInfo
+import io.github.moh_mohsin.ahoyweatherapp.data.repository.SettingsRepository
 import io.github.moh_mohsin.ahoyweatherapp.data.repository.WeatherRepository
 import io.github.moh_mohsin.ahoyweatherapp.data.source.WeatherLocalDataSource
 import io.github.moh_mohsin.ahoyweatherapp.data.source.WeatherRemoteDataSource
 import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.WeatherInfoDto
-import io.github.moh_mohsin.ahoyweatherapp.data.source.local.AppPreference
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -20,7 +20,7 @@ import javax.inject.Inject
 class WeatherRepositoryImpl @Inject constructor(
     private val weatherLocalDataSource: WeatherLocalDataSource,
     private val weatherRemoteDataSource: WeatherRemoteDataSource,
-    private val appPreference: AppPreference,
+    private val settingsRepository: SettingsRepository,
 //    private val coroutineContext: CoroutineContext = Dispatchers.IO
 ) : WeatherRepository {
 
@@ -52,7 +52,7 @@ class WeatherRepositoryImpl @Inject constructor(
             }.map { flow ->
                 flow.map { result ->
 //                    Timber.d("combine result: ${result.toString().length}")
-                    result.toWeatherInfo(appPreference.getTempScale())
+                    result.toWeatherInfo(settingsRepository.getSettings().tempScale)
                 }
             }
 
@@ -64,8 +64,8 @@ class WeatherRepositoryImpl @Inject constructor(
         return weatherRemoteDataSource.getWeather(
             lat,
             lon,
-            appPreference.getTempScale()
-        ).value.map { it.toWeatherInfo(appPreference.getTempScale()) }
+            settingsRepository.getSettings().tempScale
+        ).value.map { it.toWeatherInfo(settingsRepository.getSettings().tempScale) }
     }
 
     private fun refreshWeather(lat: Double, lon: Double) {
@@ -76,7 +76,7 @@ class WeatherRepositoryImpl @Inject constructor(
             }
 //            delay(1000)
             remoteWeatherStateFlow.value =
-                weatherRemoteDataSource.getWeather(lat, lon, appPreference.getTempScale()).value
+                weatherRemoteDataSource.getWeather(lat, lon, settingsRepository.getSettings().tempScale).value
             remoteWeatherStateFlow.value.getOrNull()?.let {
                 weatherLocalDataSource.saveWeather(it)
             }

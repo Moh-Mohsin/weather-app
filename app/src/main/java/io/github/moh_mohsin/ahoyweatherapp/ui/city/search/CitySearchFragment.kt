@@ -14,6 +14,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.moh_mohsin.ahoyweatherapp.R
+import io.github.moh_mohsin.ahoyweatherapp.data.State
 import io.github.moh_mohsin.ahoyweatherapp.databinding.CitySearchFragmentBinding
 import io.github.moh_mohsin.ahoyweatherapp.ui.city.adapter.CityAdapter
 import io.github.moh_mohsin.ahoyweatherapp.util.hide

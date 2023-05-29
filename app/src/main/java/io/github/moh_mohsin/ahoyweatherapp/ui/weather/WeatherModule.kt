@@ -1,14 +1,19 @@
 package io.github.moh_mohsin.ahoyweatherapp.ui.weather
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import androidx.room.Room
+import com.google.gson.Gson
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import io.github.moh_mohsin.ahoyweatherapp.data.repository.SettingsRepository
 import io.github.moh_mohsin.ahoyweatherapp.data.repository.WeatherRepository
+import io.github.moh_mohsin.ahoyweatherapp.data.repository.impl.SettingsRepositoryImpl
 import io.github.moh_mohsin.ahoyweatherapp.data.repository.impl.WeatherRepositoryImpl
 import io.github.moh_mohsin.ahoyweatherapp.data.source.WeatherLocalDataSource
 import io.github.moh_mohsin.ahoyweatherapp.data.source.WeatherRemoteDataSource
@@ -42,6 +47,12 @@ abstract class WeatherModule {
         weatherRemoteDataSourceImpl: WeatherRemoteDataSourceImpl
     ): WeatherRemoteDataSource
 
+    @Singleton
+    @Binds
+    abstract fun bindSettingsRepository(
+        settingRepositoryImpl: SettingsRepositoryImpl
+    ): SettingsRepository
+
 }
 
 @Module
@@ -64,4 +75,14 @@ object WeatherProvidersModule {
     fun providesOpenWeatherApi(): OpenWeatherApi {
         return OpenWeatherService().getService()
     }
+
+    @Singleton
+    @Provides
+    fun providesSharedPreferences(@ApplicationContext applicationContext: Context): SharedPreferences {
+        return applicationContext.getSharedPreferences("default", MODE_PRIVATE)
+    }
+
+    @Singleton
+    @Provides
+    fun providesGson() = Gson()
 }

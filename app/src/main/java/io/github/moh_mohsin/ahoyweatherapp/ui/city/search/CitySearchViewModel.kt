@@ -2,7 +2,8 @@ package io.github.moh_mohsin.ahoyweatherapp.ui.city.search
 
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.github.moh_mohsin.ahoyweatherapp.data.Message
+import io.github.moh_mohsin.ahoyweatherapp.data.State
+import io.github.moh_mohsin.ahoyweatherapp.data.map
 import io.github.moh_mohsin.ahoyweatherapp.data.model.City
 import io.github.moh_mohsin.ahoyweatherapp.domain.AddCityToFavoritesUseCase
 import io.github.moh_mohsin.ahoyweatherapp.domain.GetFavoriteCitiesUseCase
@@ -82,21 +83,6 @@ class CitySearchViewModel @Inject constructor(
     }
 }
 
-sealed class State<out T> {
-    data class Data<T>(val data: T) : State<T>()
-    data class Error(val message: Message) : State<Nothing>()
-    object Loading : State<Nothing>()
-    object Idle : State<Nothing>()
-}
-
-fun <T, R> State<List<T>>.map(transform: (T) -> R): State<List<R>> {
-    return when (this) {
-        is State.Data -> State.Data(data.map(transform))
-        is State.Error -> State.Error(message)
-        State.Idle -> State.Idle
-        State.Loading -> State.Loading
-    }
-}
 
 data class CityWithFavorite(
     val city: City,
