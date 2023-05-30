@@ -11,13 +11,20 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.permissionx.guolindev.PermissionX
 import io.github.moh_mohsin.ahoyweatherapp.R
 import io.github.moh_mohsin.ahoyweatherapp.data.model.WeatherInfo
-import io.github.moh_mohsin.ahoyweatherapp.util.showOrHide
 import io.github.moh_mohsin.ahoyweatherapp.util.toast
 
 
@@ -33,10 +40,6 @@ class CurrentWeatherFragment : WeatherFragment() {
         ) {
             getWeatherForCurrentLocation()
         } else {
-            // use post to solve and issue with the permission library crashing because of FragmentManager
-            requestLocationAccess()
-        }
-        binding.locationAccessButton.setOnClickListener {
             requestLocationAccess()
         }
     }
@@ -54,12 +57,28 @@ class CurrentWeatherFragment : WeatherFragment() {
                     )
                 }
                 .request { allGranted, _, _ ->
-                    binding.composeView.showOrHide(allGranted)
-                    binding.locationAccessButton.showOrHide(!allGranted)
                     if (allGranted) {
+                        showLoading()
                         getWeatherForCurrentLocation()
+                    } else {
+                        showGrantLocationAccessButton()
                     }
                 }
+        }
+    }
+
+    private fun showGrantLocationAccessButton() {
+        binding.composeView.setContent {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(),
+                contentAlignment = Alignment.Center,
+            ) {
+                Button(onClick = { requestLocationAccess() }) {
+                    Text(text = stringResource(id = R.string.allow_location_access))
+                }
+            }
         }
     }
 
@@ -88,12 +107,9 @@ class CurrentWeatherFragment : WeatherFragment() {
 
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
-                location?.let {
-                    subscribeCompose(it.latitude, it.longitude)
-                } ?: run {
-                    showRetry(true)
+                subscribeCompose(location?.latitude, location?.longitude)
+                if (location == null)
                     toast(R.string.location_not_available)
-                }
             }
     }
 }

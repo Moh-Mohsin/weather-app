@@ -10,10 +10,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,9 +37,10 @@ import io.github.moh_mohsin.ahoyweatherapp.data.source.dto.TempScale
 import io.github.moh_mohsin.ahoyweatherapp.databinding.WeatherFragmentBinding
 import io.github.moh_mohsin.ahoyweatherapp.ui.DarkColors
 import io.github.moh_mohsin.ahoyweatherapp.ui.LightColors
-import io.github.moh_mohsin.ahoyweatherapp.ui.weather.adapter.DailyWeatherAdapter
-import io.github.moh_mohsin.ahoyweatherapp.ui.weather.adapter.HourlyWeatherAdapter
-import io.github.moh_mohsin.ahoyweatherapp.util.*
+import io.github.moh_mohsin.ahoyweatherapp.util.format
+import io.github.moh_mohsin.ahoyweatherapp.util.getDateDiff
+import io.github.moh_mohsin.ahoyweatherapp.util.toast
+import io.github.moh_mohsin.ahoyweatherapp.util.viewBinding
 import java.util.*
 
 
@@ -52,22 +50,9 @@ abstract class WeatherFragment : Fragment(R.layout.weather_fragment) {
     val binding by viewBinding(WeatherFragmentBinding::bind)
     private val viewModel by viewModels<WeatherViewModel>()
 
-    private lateinit var hourlyWeatherAdapter: HourlyWeatherAdapter
-    private lateinit var dailyWeatherAdapter: DailyWeatherAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        hourlyWeatherAdapter = HourlyWeatherAdapter()
-        dailyWeatherAdapter = DailyWeatherAdapter()
-
-        binding.hourlyWeatherList.adapter = hourlyWeatherAdapter
-        binding.dailyWeatherList.adapter = dailyWeatherAdapter
-
-        binding.retry.setOnClickListener {
-            retry()
-        }
-
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.main_options, menu)
@@ -92,16 +77,26 @@ abstract class WeatherFragment : Fragment(R.layout.weather_fragment) {
 
     abstract fun getTitle(weatherInfo: WeatherInfo): String
 
-    fun subscribeCompose(lat: Double, lon: Double) {
+    fun subscribeCompose(lat: Double?, lon: Double?) {
+        if (lat == null || lon == null) {
+            binding.composeView.setContent {
+                RetryButton(onClick = {
+                    retry()
+                })
+            }
+            return
+        }
         viewModel.getWeather(lat, lon).observe(viewLifecycleOwner) { result ->
             binding.composeView.setContent {
                 when (result) {
                     is Result.Error -> {
-                        Text(text = "Error...")
+                        RetryButton {
+                            retry()
+                        }
                         toast(result.exception.msg)
                     }
                     Result.Loading -> {
-                        Text(text = "Loading...")
+                        Loading()
                     }
                     is Result.Success -> {
                         Weather(result.data)
@@ -112,8 +107,10 @@ abstract class WeatherFragment : Fragment(R.layout.weather_fragment) {
         }
     }
 
-    fun showRetry(show: Boolean) {
-        binding.retry.showOrHide(show)
+    fun showLoading(){
+        binding.composeView.setContent {
+            Loading()
+        }
     }
 
 }
@@ -142,8 +139,10 @@ fun Weather(weatherInfo: WeatherInfo) {
                     Spacer(modifier = Modifier.height(8.dp))
                     todayWeather.weather.firstOrNull()?.let { weather ->
                         Row(horizontalArrangement = Arrangement.Center) {
-                            Text(text = weather.description,
-                                style = MaterialTheme.typography.body2,)
+                            Text(
+                                text = weather.description,
+                                style = MaterialTheme.typography.body2,
+                            )
                             AsyncImage(
                                 modifier = Modifier
                                     .padding(horizontal = 8.dp)
@@ -154,7 +153,9 @@ fun Weather(weatherInfo: WeatherInfo) {
                         }
                     }
                     Divider(
-                        modifier = Modifier.width(60.dp).padding(vertical = 8.dp)
+                        modifier = Modifier
+                            .width(60.dp)
+                            .padding(vertical = 8.dp)
                     )
                     Text(
                         text = stringResource(R.string.humidity_value, todayWeather.humidity),
@@ -272,4 +273,44 @@ fun DailyWeatherItem(daily: Daily) {
 @Composable
 fun DailyWeatherItemPreview() {
     DailyWeatherItem(daily = weatherInfo.daily.first())
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RetryPreview() {
+    RetryButton {
+
+    }
+}
+
+@Composable
+fun RetryButton(onClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(),
+        contentAlignment = Alignment.Center,
+    ) {
+        Button(onClick) {
+            Text(text = stringResource(id = R.string.retry))
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LoadingPreview() {
+    Loading()
+}
+
+@Composable
+fun Loading() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(),
+        contentAlignment = Alignment.Center
+    ) {
+        CircularProgressIndicator()
+    }
 }
