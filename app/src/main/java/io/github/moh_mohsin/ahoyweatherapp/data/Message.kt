@@ -2,6 +2,8 @@ package io.github.moh_mohsin.ahoyweatherapp.data
 
 import android.content.Context
 import androidx.annotation.StringRes
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 
 sealed class Message {
@@ -13,6 +15,12 @@ sealed class Message {
 fun Message.get(context: Context): String =
     when (this) {
         is Message.Res -> context.getString(stringId)
+        is Message.Raw -> msg
+    }
+@Composable
+fun Message.get(): String =
+    when (this) {
+        is Message.Res -> stringResource(stringId)
         is Message.Raw -> msg
     }
 
